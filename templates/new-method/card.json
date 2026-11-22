@@ -1,0 +1,29 @@
+{
+  "id": "my-method",
+  "name": "My Method (Full Name)",
+  "category": "regression",
+  "when_to_use": "One or two sentences for a technical reader: data structure, variable types and the question the method answers.",
+  "sources": [
+    "analyses/regression/my_method.py"
+  ],
+  "python_functions": [
+    "my_method()"
+  ],
+  "expected_input": {
+    "dependent_variable_type": "metric",
+    "problem_type": "supervised - regression",
+    "data_structure": "one row per observation, numeric columns",
+    "predictor_type": "metric",
+    "question": "The plain question this method answers?"
+  },
+  "plain_explanation": {
+    "purpose": "What it does, in one sentence a non-statistician understands.",
+    "when_to_use_plain": "When to reach for it, without jargon.",
+    "data_needed": "What the table must look like (one row per..., columns with...).",
+    "example": "A small realistic example, with made-up or public data only.",
+    "diagram": "Optional: a one-line ASCII sketch"
+  },
+  "code_status": "own-implementation",
+  "r_functions": [],
+  "notes": "Optional: caveats, extra dependencies, assumptions."
+}
