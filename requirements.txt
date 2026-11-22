@@ -1,5 +1,5 @@
 # Dependencies of the wrappers in skills/stats-method-picker/analyses/ (only what is imported).
-# Catalog lookup (consultar.py) uses only the standard library.
+# Catalog lookup (query.py) and the validator use only the standard library.
 numpy>=2.0
 pandas>=2.2
 scipy>=1.13

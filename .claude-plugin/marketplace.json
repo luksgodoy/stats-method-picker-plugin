@@ -7,8 +7,8 @@
     {
       "name": "stats-method-picker",
       "source": "./",
-      "description": "Catalog of 70 statistical and ML techniques with Python wrappers."
+      "description": "Catalog of statistical and ML techniques with Python wrappers."
     }
   ],
-  "description": "Marketplace for the stats-method-picker plugin: a catalog of 70 statistical and ML techniques."
+  "description": "Marketplace for the stats-method-picker plugin: a community-extensible catalog of statistical and ML techniques."
 }
