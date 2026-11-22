@@ -1,0 +1,27 @@
+{
+  "id": "correlation",
+  "name": "Correlation (Pearson / Spearman) with significance test",
+  "when_to_use": "Two metric variables (Pearson, linear relationship) or at least ordinal ones (Spearman, monotonic relationship); measure the strength and test the significance of the association before other modeling.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/hypothesis_tests/correlation.py"
+  ],
+  "notes": "Measures whether two numeric variables rise and fall together, and whether that relationship is strong enough to trust. Applications: check whether marketing spend tracks sales before running a regression.",
+  "expected_input": {
+    "data_structure": "tabular",
+    "question": "Do two numeric variables vary together, and is the relationship strong enough to trust?"
+  },
+  "python_functions": [
+    "pearson_correlation()",
+    "spearman_correlation()"
+  ],
+  "category": "hypothesis_tests",
+  "pdca_use": "Plan/Check phase: measure whether two indicators vary together (and how much) before proposing an action — auditable diagnosis, not a predictive model.",
+  "plain_explanation": {
+    "purpose": "Measures how much two things vary together, from -1 to +1.",
+    "when_to_use_plain": "When you want to know whether two numbers move together, without claiming that one causes the other.",
+    "data_needed": "Two or more numeric columns.",
+    "example": "See whether ad spend and sales rise together.",
+    "diagram": "+1: rise together | 0: no relationship | -1: one rises, the other falls"
+  }
+}

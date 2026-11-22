@@ -1,0 +1,30 @@
+{
+  "id": "arima",
+  "name": "ARIMA",
+  "when_to_use": "Stationary time series (or made stationary via differencing/Box-Cox), with relevant autocorrelation in the residuals.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/time_series/arima.py"
+  ],
+  "r_functions": [
+    "forecast::auto.arima()",
+    "stats::arima()",
+    "forecast::forecast()"
+  ],
+  "expected_input": {
+    "data_structure": "univariate time series",
+    "question": "How to model a time series with autocorrelation?"
+  },
+  "python_functions": [
+    "fit_arima()",
+    "select_arima_order()"
+  ],
+  "category": "time_series",
+  "plain_explanation": {
+    "purpose": "Forecasts a series using its own past behavior (inertia, corrections, shocks).",
+    "when_to_use_plain": "When the series depends on its past and you want a model more flexible than smoothing.",
+    "data_needed": "A column of values over time, at regular intervals, preferably 30+ points.",
+    "example": "Forecast next month's ticket volume.",
+    "diagram": "past values + past errors -> next value"
+  }
+}

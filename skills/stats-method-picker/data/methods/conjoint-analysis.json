@@ -1,0 +1,25 @@
+{
+  "id": "conjoint-analysis",
+  "name": "Conjoint Analysis",
+  "when_to_use": "Product/service described by combinable attributes and levels; respondents rate combinations; decompose total preference into the contribution of each attribute.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/multivariate/conjoint_analysis.py"
+  ],
+  "notes": "Decomposes customer preference for a product into the contributions of each characteristic (price, brand, color). Applications: decide which attribute combination maximizes purchase intent.",
+  "expected_input": {
+    "data_structure": "tabular (attribute-combination design)",
+    "question": "How much does each attribute of a product contribute to customer preference?"
+  },
+  "python_functions": [
+    "conjoint_analysis()"
+  ],
+  "category": "multivariate",
+  "plain_explanation": {
+    "purpose": "Discovers what people value most in a product, from choices among bundles.",
+    "when_to_use_plain": "When you need to know how much price, brand or lead time weigh in the purchase decision.",
+    "data_needed": "Answers from people ranking or choosing among attribute combinations.",
+    "example": "Find out whether the customer prefers to pay less or receive sooner.",
+    "diagram": "bundle A (cheap, slow) vs. bundle B (expensive, fast) -> weight of each attribute"
+  }
+}

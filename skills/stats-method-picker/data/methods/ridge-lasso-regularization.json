@@ -1,0 +1,28 @@
+{
+  "id": "ridge-lasso-regularization",
+  "name": "Regularization (Ridge / Lasso / Elastic Net)",
+  "when_to_use": "Linear/logistic regression with many candidate predictors and risk of overfitting or multicollinearity; penalizes large coefficients (Ridge), zeroes out the least useful (Lasso) or combines both (Elastic Net).",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/regression/ridge_lasso_regularization.py"
+  ],
+  "notes": "Versions of linear regression that penalize barely useful variables, avoiding a \"memorized\" model and helping to select predictors. Applications: many candidate variables and few observations (e.g., survey data).",
+  "expected_input": {
+    "problem_type": "supervised - regression/classification",
+    "data_structure": "tabular",
+    "question": "Which predictors really matter when there are many candidates and a risk of overfitting?"
+  },
+  "python_functions": [
+    "ridge()",
+    "lasso()",
+    "elastic_net()"
+  ],
+  "category": "regression",
+  "plain_explanation": {
+    "purpose": "Does regression with many factors 'taming' weights so as not to memorize noise.",
+    "when_to_use_plain": "When there are many factors, some redundant, and ordinary regression becomes unstable.",
+    "data_needed": "A table with a numeric response and many factor columns.",
+    "example": "Predict real-estate prices with 50 features, selecting the ones that matter.",
+    "diagram": "many factors -> penalize large weights -> few factors remain (Lasso zeroes)"
+  }
+}

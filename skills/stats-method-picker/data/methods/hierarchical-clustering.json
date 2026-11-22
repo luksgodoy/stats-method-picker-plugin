@@ -1,0 +1,33 @@
+{
+  "id": "hierarchical-clustering",
+  "name": "Hierarchical Clustering",
+  "when_to_use": "Metric variables, no dependent variable (unsupervised); groups by distance matrix (Euclidean) and linkage method (single/complete/average/ward.D); number of groups decided from the dendrogram.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/multivariate/hierarchical_clustering.py"
+  ],
+  "r_functions": [
+    "dist()",
+    "hclust()",
+    "rect.hclust()",
+    "as.dendrogram()"
+  ],
+  "expected_input": {
+    "dependent_variable": null,
+    "problem_type": "unsupervised",
+    "data_structure": "distance matrix",
+    "predictor_type": "metric",
+    "question": "How to group observations by similarity?"
+  },
+  "python_functions": [
+    "hierarchical_clustering()"
+  ],
+  "category": "multivariate",
+  "plain_explanation": {
+    "purpose": "Joins similar items into groups, from most to least similar, forming a tree of groupings.",
+    "when_to_use_plain": "When you want to discover natural groups but do not know how many exist, and the dataset is small or medium.",
+    "data_needed": "A table with one item per row and several numeric measures per column (e.g., spending, age, frequency).",
+    "example": "Group similar municipalities on education indicators to compare each only with its peers.",
+    "diagram": "A B C D E  ->  (A B) (D E) C  ->  ((A B) C) (D E)  ->  all together"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "mca",
+  "name": "Multiple Correspondence Analysis (MCA)",
+  "when_to_use": "Three or more categorical variables simultaneously, when a single contingency table is not possible.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/multivariate/mca.py"
+  ],
+  "r_functions": [
+    "FactoMineR::MCA()"
+  ],
+  "expected_input": {
+    "data_structure": "contingency table",
+    "predictor_type": "categorical",
+    "question": "What is the association structure among categorical variables?"
+  },
+  "python_functions": [
+    "mca()"
+  ],
+  "category": "multivariate",
+  "plain_explanation": {
+    "purpose": "Makes the same map as correspondence analysis, but for several categorical variables at once.",
+    "when_to_use_plain": "When there are several multiple-choice questionnaires and you want to see which answers appear together.",
+    "data_needed": "A table with one respondent per row and several categorical columns (text or codes).",
+    "example": "See the answer profile of a satisfaction survey: whoever chooses 'excellent' also chooses what?",
+    "diagram": "answers to several questions -> single map: close answers appear together"
+  }
+}

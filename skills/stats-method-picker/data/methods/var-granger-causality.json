@@ -1,0 +1,26 @@
+{
+  "id": "var-granger-causality",
+  "name": "VAR Models / Granger Causality",
+  "when_to_use": "Two or more time series that potentially influence each other; model them jointly and test whether past values of one help predict another.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/time_series/var_granger_causality.py"
+  ],
+  "notes": "Models several time series that influence each other and tests whether one helps predict another. Applications: check whether media spend today explains sales in the following weeks.",
+  "expected_input": {
+    "data_structure": "multivariate time series",
+    "question": "Does one time series help predict another, and in which direction?"
+  },
+  "python_functions": [
+    "fit_var()",
+    "granger_causality()"
+  ],
+  "category": "time_series",
+  "plain_explanation": {
+    "purpose": "Analyzes several series together and tests whether the past of one helps predict another.",
+    "when_to_use_plain": "When you want to know whether one series drives another in time, without proving real causation.",
+    "data_needed": "Two or more series columns over the same period and frequency.",
+    "example": "See whether a change in ads precedes a change in sales.",
+    "diagram": "series A (past) ->? series B (future)"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "ann-from-scratch",
+  "name": "Neural Network implemented from scratch (no framework)",
+  "when_to_use": "Illustrative purposes; continuous dependent variable (e.g., wine quality); illustrates forward/backward propagation and gradient manually, without keras/tensorflow.",
+  "code_status": "needs-adaptation",
+  "sources": [
+    "analyses/supervised_learning/ann_from_scratch.py"
+  ],
+  "r_functions": [
+    "custom functions (getLayerSize, initializeParameters, sigmoid, forwardPropagation, backwardPropagation, updateParameters, trainModel) — base R only"
+  ],
+  "expected_input": {
+    "data_structure": "tabular",
+    "question": "How to understand forward/backward propagation manually?",
+    "note": "Needs adaptation before running (see the notes field)."
+  },
+  "python_functions": [
+    "sigmoid()",
+    "ann_from_scratch()"
+  ],
+  "category": "supervised_learning",
+  "plain_explanation": {
+    "purpose": "Neural network built by hand, to understand how it learns by adjusting weights.",
+    "when_to_use_plain": "To study the inner workings, not for production.",
+    "data_needed": "A numeric table of factors and a response.",
+    "example": "Watch, step by step, a network learn to predict a score.",
+    "diagram": "input -> hidden layer -> output -> error -> correct the weights -> repeat"
+  }
+}

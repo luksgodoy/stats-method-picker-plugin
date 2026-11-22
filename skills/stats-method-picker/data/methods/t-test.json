@@ -1,0 +1,28 @@
+{
+  "id": "t-test",
+  "name": "t-test (one-sample, two-sample, paired)",
+  "when_to_use": "Compare the mean of one group against a reference value, or the means of two groups (independent or paired); metric dependent variable, approximately normal.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/hypothesis_tests/t_test.py"
+  ],
+  "notes": "Compares the mean of one group with a reference value, or the means of two groups, and tells whether the observed difference is large enough not to be mere chance. Applications: before/after a campaign; comparing the performance of two branches.",
+  "expected_input": {
+    "problem_type": "hypothesis test",
+    "data_structure": "tabular",
+    "question": "Is the difference between the means of one or two groups statistically significant?"
+  },
+  "python_functions": [
+    "one_sample_t_test()",
+    "two_sample_t_test()"
+  ],
+  "category": "hypothesis_tests",
+  "pdca_use": "Check phase: compare an indicator before/after an action, or between two units, with an auditable numeric result (statistic and p-value), no free-form narrative.",
+  "plain_explanation": {
+    "purpose": "Checks whether the difference between the means of two groups is real or could be chance.",
+    "when_to_use_plain": "When comparing two groups on a number (e.g., before and after).",
+    "data_needed": "A numeric column and one that splits the data into two groups (or two measurements of the same item).",
+    "example": "See whether service time changed after a new process.",
+    "diagram": "group A: mean 10 | group B: mean 12 -> is the difference real?"
+  }
+}

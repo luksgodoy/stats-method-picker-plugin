@@ -1,0 +1,27 @@
+{
+  "id": "knn",
+  "name": "K-Nearest Neighbors (KNN)",
+  "when_to_use": "Classification or regression by similarity; categorical or metric dependent variable, metric/scaled predictors, no assumption of functional form.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/supervised_learning/knn.py"
+  ],
+  "notes": "Classifies or predicts a new case by looking at the most similar already-known cases. Applications: simple recommendation, diagnosis by profile similarity.",
+  "expected_input": {
+    "problem_type": "supervised - classification/regression",
+    "data_structure": "tabular",
+    "question": "What is the expected class or value of a new case, looking at the most similar already-known cases?"
+  },
+  "python_functions": [
+    "knn_classification()",
+    "knn_regression()"
+  ],
+  "category": "supervised_learning",
+  "plain_explanation": {
+    "purpose": "Classifies or predicts by looking at the most similar already-known neighbors.",
+    "when_to_use_plain": "When 'those who are alike behave alike' makes sense and the dataset is small.",
+    "data_needed": "A table with numeric factors and the known response of each case.",
+    "example": "Predict a new customer's plan from the 5 most similar customers.",
+    "diagram": "new point -> 5 nearest neighbors -> majority decides"
+  }
+}

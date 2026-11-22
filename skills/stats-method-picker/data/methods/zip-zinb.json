@@ -1,0 +1,30 @@
+{
+  "id": "zip-zinb",
+  "name": "Zero-inflated models (ZIP / ZINB)",
+  "when_to_use": "Count dependent variable with excess zeros beyond what Poisson or Negative Binomial predicts.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/regression/zip_zinb.py"
+  ],
+  "r_functions": [
+    "pscl::zeroinfl()"
+  ],
+  "expected_input": {
+    "dependent_variable_type": "count",
+    "problem_type": "supervised - generalized linear model",
+    "data_structure": "tabular",
+    "question": "How to model counts with excess zeros?"
+  },
+  "python_functions": [
+    "zip_model()",
+    "zinb_model()"
+  ],
+  "category": "regression",
+  "plain_explanation": {
+    "purpose": "Predicts counts when there are excess zeros, treating 'never happens' separately from 'sometimes happens'.",
+    "when_to_use_plain": "When most items have zero and you need to understand why there are so many zeros.",
+    "data_needed": "A column of counts with many zeros and factor columns.",
+    "example": "Count accidents per company, where many companies never have any because of safety policy.",
+    "diagram": "item -> is it in the 'always zero' group? yes: 0 | no: normal count (0, 1, 2...)"
+  }
+}

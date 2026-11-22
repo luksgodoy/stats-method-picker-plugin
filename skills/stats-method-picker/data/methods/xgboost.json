@@ -1,0 +1,30 @@
+{
+  "id": "xgboost",
+  "name": "XGBoost",
+  "when_to_use": "Categorical or continuous dependent variable; large data volumes, tolerates nonlinearity and interaction between variables; requires tuning (grid/cv).",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/supervised_learning/xgboost_wrapper.py"
+  ],
+  "r_functions": [
+    "caret::train(method=\"xgbTree\")"
+  ],
+  "expected_input": {
+    "dependent_variable_type": "categorical",
+    "problem_type": "supervised - classification",
+    "data_structure": "tabular",
+    "question": "How to improve prediction by sequentially fitting residuals?"
+  },
+  "python_functions": [
+    "xgboost_classification()",
+    "xgboost_regression()"
+  ],
+  "category": "supervised_learning",
+  "plain_explanation": {
+    "purpose": "Makes very accurate predictions by combining small trees that correct each other in sequence.",
+    "when_to_use_plain": "When accuracy matters more than explanation and there is plenty of tabular data.",
+    "data_needed": "A table with response and factors, hundreds of rows or more.",
+    "example": "Predict the sale probability of each opportunity to order the contact queue.",
+    "diagram": "tree 1 + tree 2 + ... + tree N = final prediction"
+  }
+}

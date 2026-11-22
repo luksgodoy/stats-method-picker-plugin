@@ -1,0 +1,29 @@
+{
+  "id": "bootstrapping",
+  "name": "Bootstrapping (confidence interval by resampling)",
+  "when_to_use": "Estimate the sampling distribution/confidence interval of a statistic (e.g., quantile, mean) without assuming normality; any numeric variable.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/supervised_learning/bootstrapping.py"
+  ],
+  "r_functions": [
+    "sample()",
+    "quantile()"
+  ],
+  "expected_input": {
+    "data_structure": "tabular",
+    "question": "What is the confidence interval of a statistic without assuming normality?",
+    "expected_scale": "no specific assumption"
+  },
+  "python_functions": [
+    "bootstrap_confidence_interval()"
+  ],
+  "category": "supervised_learning",
+  "plain_explanation": {
+    "purpose": "Estimates the uncertainty of a result by drawing data from the dataset itself many times.",
+    "when_to_use_plain": "When you want a confidence interval without relying on formulas that assume the shape of the data.",
+    "data_needed": "Any table; works even with few rows.",
+    "example": "Give an interval for the conversion rate of a small sample of opportunities.",
+    "diagram": "dataset -> resample with replacement 1000x -> compute 1000x -> range holding 95%"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "web-scraping",
+  "name": "Web Scraping",
+  "when_to_use": "Extraction of unstructured data from HTML pages (text, tables); not a statistical technique in itself, but a collection step before any analysis.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/text/web_scraping.py"
+  ],
+  "r_functions": [
+    "rvest::read_html()",
+    "html_elements()",
+    "html_text()",
+    "httr"
+  ],
+  "notes": "Depends on internet access at run time — not a code failure.",
+  "expected_input": {
+    "data_structure": "unstructured HTML",
+    "question": "How to extract structured data from HTML pages?"
+  },
+  "python_functions": [
+    "extract_by_tag()"
+  ],
+  "category": "text",
+  "plain_explanation": {
+    "purpose": "Automatically collects information published on web pages.",
+    "when_to_use_plain": "When the data is on a website and there is no ready download.",
+    "data_needed": "Addresses (URLs) of the pages and the description of the section to collect.",
+    "example": "Download news from a portal for later analysis.",
+    "diagram": "web page -> program reads the text -> organized table"
+  }
+}

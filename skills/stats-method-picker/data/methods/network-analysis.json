@@ -1,0 +1,26 @@
+{
+  "id": "network-analysis",
+  "name": "Social Network Analysis / Graphs",
+  "when_to_use": "Data representable as connections between entities (people, companies, items); measure centrality, distance and communities in the network formed by these connections.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/causal_special/network_analysis.py"
+  ],
+  "notes": "Maps connections between people/items and measures who is most central or which groups form in the network. Applications: customer referral network, informal org chart, co-authorship.",
+  "expected_input": {
+    "data_structure": "graph (nodes and edges)",
+    "question": "Who is most central in the network, and which groups form in it?"
+  },
+  "python_functions": [
+    "network_metrics()",
+    "detect_communities()"
+  ],
+  "category": "causal_special",
+  "plain_explanation": {
+    "purpose": "Studies connections between entities, finding the most central ones and the groups.",
+    "when_to_use_plain": "When the question is about who is connected to whom.",
+    "data_needed": "List of connected pairs (who links to whom), with optional weight.",
+    "example": "Find central suppliers in a purchasing network.",
+    "diagram": "A--B--C\n   |\n   D (B is central)"
+  }
+}

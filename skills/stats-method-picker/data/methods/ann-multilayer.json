@@ -1,0 +1,32 @@
+{
+  "id": "ann-multilayer",
+  "name": "Multilayer Neural Network (neuralnet) — regression and classification",
+  "when_to_use": "Continuous (e.g., property value) or binary (e.g., admission) dependent variable; comparison with CART tree; architecture with multiple hidden layers.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/supervised_learning/ann_multilayer.py"
+  ],
+  "r_functions": [
+    "neuralnet::neuralnet(hidden=c(...))",
+    "compute()",
+    "rpart::rpart()"
+  ],
+  "expected_input": {
+    "dependent_variable_type": "binary",
+    "problem_type": "supervised - binary classification",
+    "data_structure": "tabular",
+    "question": "How to model complex relationships with a multilayer neural network?"
+  },
+  "python_functions": [
+    "mlp_classification()",
+    "mlp_regression()"
+  ],
+  "category": "supervised_learning",
+  "plain_explanation": {
+    "purpose": "Neural network with intermediate layers, which learns complex relationships among the factors.",
+    "when_to_use_plain": "When the relationship between factors and response is complicated and there is plenty of data.",
+    "data_needed": "A numeric table with a response; thousands of rows help.",
+    "example": "Predict a building's energy consumption from weather and occupancy.",
+    "diagram": "inputs -> layer 1 -> layer 2 -> output"
+  }
+}

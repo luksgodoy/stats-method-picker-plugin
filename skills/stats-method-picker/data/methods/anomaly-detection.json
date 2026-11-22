@@ -1,0 +1,27 @@
+{
+  "id": "anomaly-detection",
+  "name": "Anomaly Detection (Isolation Forest, LOF, One-Class SVM)",
+  "when_to_use": "Identify rare/atypical cases with no (or few) labeled examples of anomalies; learns the \"normal\" pattern of the data and flags what deviates.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/causal_special/anomaly_detection.py"
+  ],
+  "notes": "Learns the \"normal\" pattern of the data and flags the cases that deviate too much from it. Applications: transaction fraud, sensor failure, audit outliers.",
+  "expected_input": {
+    "problem_type": "unsupervised / semi-supervised",
+    "data_structure": "tabular",
+    "question": "Which cases deviate too much from the normal pattern of the data?"
+  },
+  "python_functions": [
+    "detect_anomalies_isolation_forest()",
+    "detect_anomalies_lof()"
+  ],
+  "category": "causal_special",
+  "plain_explanation": {
+    "purpose": "Flags cases very different from the pattern that deserve attention.",
+    "when_to_use_plain": "When looking for fraud, errors or rare failures.",
+    "data_needed": "Numeric table, one case per row, in reasonable volume.",
+    "example": "Find out-of-pattern expenses in a spending dataset.",
+    "diagram": "cloud of normal points + a few isolated points = anomalies"
+  }
+}

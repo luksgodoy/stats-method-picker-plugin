@@ -1,0 +1,29 @@
+{
+  "id": "lexicon-sentiment-analysis",
+  "name": "Lexicon-based Sentiment Analysis (AFINN/Bing/NRC dictionaries)",
+  "when_to_use": "Polarity/emotion of text via a join with a ready-made lexicon, with no labeled/training data needed; English corpus in the material (e.g., Jane Austen novels).",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/text/lexicon_sentiment_analysis.py"
+  ],
+  "r_functions": [
+    "tidytext::get_sentiments(\"afinn\"/\"bing\"/\"nrc\")",
+    "inner_join()",
+    "janeaustenr::austen_books()"
+  ],
+  "expected_input": {
+    "data_structure": "text corpus",
+    "question": "What is the polarity/emotion of a text?"
+  },
+  "python_functions": [
+    "lexicon_sentiment()"
+  ],
+  "category": "text",
+  "plain_explanation": {
+    "purpose": "Measures whether a text is positive or negative by summing scores of words from a dictionary.",
+    "when_to_use_plain": "When you want an opinion thermometer without labeling anything.",
+    "data_needed": "A text column and a dictionary of words with scores.",
+    "example": "Measure the tone of customer reviews.",
+    "diagram": "'great' +2, 'delay' -1  ->  sum = +1  ->  positive"
+  }
+}

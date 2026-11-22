@@ -1,0 +1,27 @@
+{
+  "id": "gaussian-mixture-models",
+  "name": "Gaussian Mixture Models (GMM)",
+  "when_to_use": "Clustering when groups may overlap; instead of hard assignment (like k-means, already cataloged in 05-clustering-nao-hierarquico), estimates the probability of each case belonging to each group.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/multivariate/gaussian_mixture_models.py"
+  ],
+  "notes": "Clustering that, instead of hard groups, gives the probability of each case belonging to each group. Applications: customer segmentation with overlapping profiles.",
+  "expected_input": {
+    "problem_type": "unsupervised",
+    "data_structure": "tabular",
+    "question": "What is the probability of a case belonging to each of several latent groups?"
+  },
+  "python_functions": [
+    "gaussian_mixture()",
+    "choose_n_components()"
+  ],
+  "category": "multivariate",
+  "plain_explanation": {
+    "purpose": "Groups items allowing each to belong partially to several groups.",
+    "when_to_use_plain": "When groups overlap and you want a probability, not just a label.",
+    "data_needed": "Numeric table, one item per row.",
+    "example": "Segment customers who sit between two profiles.",
+    "diagram": "item: 70% group A, 30% group B"
+  }
+}

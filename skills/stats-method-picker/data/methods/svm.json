@@ -1,0 +1,28 @@
+{
+  "id": "svm",
+  "name": "Support Vector Machine (SVM)",
+  "when_to_use": "Binary classification (or multiclass via extension) with a not necessarily linear boundary between classes (kernel); seeks the maximum separation margin between groups.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/supervised_learning/svm.py"
+  ],
+  "notes": "Finds the \"dividing line\" that separates two classes with the largest possible safety margin. Applications: binary classification with a non-obvious boundary between groups.",
+  "expected_input": {
+    "dependent_variable_type": "categorical",
+    "problem_type": "supervised - classification",
+    "data_structure": "tabular",
+    "question": "What is the boundary that separates two classes with the largest possible safety margin?"
+  },
+  "python_functions": [
+    "svm_classification()",
+    "svm_regression()"
+  ],
+  "category": "supervised_learning",
+  "plain_explanation": {
+    "purpose": "Finds the boundary that best separates two classes, with the most room possible.",
+    "when_to_use_plain": "When there are two classes and many factors, with a medium dataset.",
+    "data_needed": "Numeric factor columns and a response with two classes.",
+    "example": "Separate spam and non-spam emails.",
+    "diagram": "class A  ooo | line with margin | xxx  class B"
+  }
+}

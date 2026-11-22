@@ -1,0 +1,32 @@
+{
+  "id": "bagging-random-forest",
+  "name": "Bagging / Random Forest",
+  "when_to_use": "Categorical or continuous dependent variable; reduces the variance of unstable trees; robust to outliers and nonlinearity; needs a medium/large dataset.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/supervised_learning/bagging_random_forest.py"
+  ],
+  "r_functions": [
+    "randomForest::randomForest()",
+    "caret::trainControl(method=\"repeatedcv\")",
+    "caret::train()"
+  ],
+  "expected_input": {
+    "dependent_variable_type": "categorical",
+    "problem_type": "supervised - classification",
+    "data_structure": "tabular",
+    "question": "How to reduce the variance of unstable models with multiple trees?"
+  },
+  "python_functions": [
+    "bagging()",
+    "random_forest()"
+  ],
+  "category": "supervised_learning",
+  "plain_explanation": {
+    "purpose": "Trains many different trees and uses their vote, giving more stable predictions.",
+    "when_to_use_plain": "When you want good accuracy without much tuning and with varied data.",
+    "data_needed": "A table with the response and several factor columns; hundreds of rows or more.",
+    "example": "Score the prospecting potential of each company.",
+    "diagram": "tree 1, tree 2, ... tree 500 -> vote -> final answer"
+  }
+}

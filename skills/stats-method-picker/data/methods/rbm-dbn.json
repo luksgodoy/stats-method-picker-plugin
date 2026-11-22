@@ -1,0 +1,34 @@
+{
+  "id": "rbm-dbn",
+  "name": "Restricted Boltzmann Machine (RBM) / Deep Belief Network (DBN)",
+  "when_to_use": "Unsupervised/generative learning for images (reconstruction) and multiclass classification (e.g., MNIST/Fashion-MNIST digits); multilevel categorical dependent variable.",
+  "code_status": "needs-adaptation",
+  "sources": [
+    "analyses/supervised_learning/rbm_dbn.py"
+  ],
+  "r_functions": [
+    "RBM::RBM()",
+    "RBM::StackRBM() (DBN)",
+    "RBM::ReconstructRBM()",
+    "RBM::PredictRBM()"
+  ],
+  "notes": "Depends on the RBM package installed via devtools::install_github(\"TimoMatzen/RBM\") — it is not on CRAN, not a standard installation.",
+  "expected_input": {
+    "dependent_variable": null,
+    "problem_type": "unsupervised",
+    "data_structure": "hierarchical data",
+    "question": "How to learn unsupervised representations of images?",
+    "note": "Needs adaptation before running (see the notes field)."
+  },
+  "python_functions": [
+    "rbm_feature_extraction()"
+  ],
+  "category": "supervised_learning",
+  "plain_explanation": {
+    "purpose": "Network that learns hidden patterns in the data on its own, with no labeled response needed.",
+    "when_to_use_plain": "To extract features automatically before classifying, or to study the subject.",
+    "data_needed": "A numeric table of factors, with no response column required.",
+    "example": "Discover recurring purchase patterns before building a model.",
+    "diagram": "data -> layers that summarize what repeats -> compact representation"
+  }
+}

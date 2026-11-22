@@ -1,0 +1,29 @@
+{
+  "id": "poisson-regression",
+  "name": "Poisson Regression",
+  "when_to_use": "Count dependent variable (integer, non-negative), assuming equidispersion (mean approximately equal to variance).",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/regression/poisson.py"
+  ],
+  "r_functions": [
+    "glm(family=\"poisson\")"
+  ],
+  "expected_input": {
+    "dependent_variable_type": "count",
+    "problem_type": "supervised - generalized linear model",
+    "data_structure": "tabular",
+    "question": "How to model a count dependent variable with equidispersion?"
+  },
+  "python_functions": [
+    "poisson_regression()"
+  ],
+  "category": "regression",
+  "plain_explanation": {
+    "purpose": "Predicts counts (how many times something happens) from factors.",
+    "when_to_use_plain": "When the outcome is a small integer: occurrences, calls, defects per period.",
+    "data_needed": "A column with counts (0, 1, 2...) and factor columns.",
+    "example": "Estimate the number of support tickets per week according to customer size.",
+    "diagram": "factors -> [model] -> expected count (e.g., 3.2 per week)"
+  }
+}

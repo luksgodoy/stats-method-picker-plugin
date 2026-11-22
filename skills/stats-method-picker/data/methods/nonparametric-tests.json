@@ -1,0 +1,29 @@
+{
+  "id": "nonparametric-tests",
+  "name": "Non-parametric tests (Mann-Whitney, Wilcoxon, Kruskal-Wallis)",
+  "when_to_use": "Same group comparisons as the t-test/ANOVA, when the dependent variable is not normally distributed or the sample is small; ordinal or non-normal metric data.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/hypothesis_tests/nonparametric_tests.py"
+  ],
+  "notes": "The same group comparisons as the t-test/ANOVA, but without requiring the data to follow a normal distribution. Applications: data with outliers or small samples, common in internal surveys.",
+  "expected_input": {
+    "problem_type": "hypothesis test",
+    "data_structure": "tabular",
+    "question": "Do the groups differ when normality cannot be assumed?"
+  },
+  "python_functions": [
+    "mann_whitney()",
+    "paired_wilcoxon()",
+    "kruskal_wallis()"
+  ],
+  "category": "hypothesis_tests",
+  "pdca_use": "Check phase: same before/after or between-group comparison when the indicator is not normally distributed (common in small PDCA datasets) — still a deterministic calculation.",
+  "plain_explanation": {
+    "purpose": "Compare groups without assuming the data have a 'normal' shape.",
+    "when_to_use_plain": "When the sample is small, has extreme values or is a ranking (score from 1 to 5).",
+    "data_needed": "A column of values or ranks and a group column.",
+    "example": "Compare satisfaction scores between two stores.",
+    "diagram": "values -> become ranks (1st, 2nd...) -> compare ranks between groups"
+  }
+}

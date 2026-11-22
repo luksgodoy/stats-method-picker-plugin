@@ -1,0 +1,27 @@
+{
+  "id": "spc-control-charts",
+  "name": "Control Charts (SPC) and Process Capability (Cp/Cpk)",
+  "when_to_use": "Process measured repeatedly over time; control charts assess whether the process is stable (common vs. special causes), Cp/Cpk measure whether it is within acceptable specification limits.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/hypothesis_tests/spc_control_charts.py"
+  ],
+  "notes": "Tracks a process over time to see whether it is stable, and measures whether it is within acceptable limits. Applications: industrial quality control, operational indicator monitoring.",
+  "expected_input": {
+    "data_structure": "time series of process measurements",
+    "question": "Is the process stable over time, and within acceptable limits?"
+  },
+  "python_functions": [
+    "xbar_r_chart()",
+    "process_capability()"
+  ],
+  "category": "hypothesis_tests",
+  "pdca_use": "Direct fit for Check: control charts and Cp/Cpk are the classic SPC instrument for telling whether a process is stable and within specification — same logic as industrial PDCA, 100% deterministic calculation.",
+  "plain_explanation": {
+    "purpose": "Tracks a process over time and warns when it leaves its normal behavior.",
+    "when_to_use_plain": "When you want to monitor ongoing quality or performance.",
+    "data_needed": "Successive measurements of the process, in time order.",
+    "example": "Watch the daily response time and act when it leaves the band.",
+    "diagram": "upper limit ---------\nmean       ~~~~~~~~~\nlower limit ---------"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "text-classification-naive-bayes",
+  "name": "Text Classification (Naive Bayes on a document-term matrix)",
+  "when_to_use": "Supervised classification of sentiment/category (e.g., positive/negative) with labeled data; binary categorical dependent variable; requires a clean corpus (stopwords, stemming) and a sparse document-term matrix.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/text/text_classification_naive_bayes.py"
+  ],
+  "r_functions": [
+    "tm::VCorpus()",
+    "tm::DocumentTermMatrix()",
+    "e1071::naiveBayes()",
+    "caret::confusionMatrix()"
+  ],
+  "expected_input": {
+    "dependent_variable_type": "binary",
+    "problem_type": "supervised - binary classification",
+    "data_structure": "text corpus",
+    "predictor_type": "document-term matrix",
+    "question": "How to classify documents with a probabilistic model?"
+  },
+  "python_functions": [
+    "classify_text()"
+  ],
+  "category": "text",
+  "plain_explanation": {
+    "purpose": "Classifies texts into categories by learning from already labeled examples.",
+    "when_to_use_plain": "When there are texts with a known category and you want to classify the new ones.",
+    "data_needed": "A text column and a column with the correct category, with a reasonable volume of examples.",
+    "example": "Classify an expense description by type.",
+    "diagram": "words of the text -> chance of each category -> the highest wins"
+  }
+}

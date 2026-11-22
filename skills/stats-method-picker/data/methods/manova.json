@@ -1,0 +1,26 @@
+{
+  "id": "manova",
+  "name": "MANOVA",
+  "when_to_use": "Compare three or more groups on several metric dependent variables simultaneously, instead of running one ANOVA per variable.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/multivariate/manova.py"
+  ],
+  "notes": "Like ANOVA, but compares several numeric outcomes at once across groups, instead of one by one. Applications: compare 3 marketing campaigns on sales, clicks and retention simultaneously.",
+  "expected_input": {
+    "problem_type": "hypothesis test",
+    "data_structure": "tabular",
+    "question": "Do the groups differ when several metrics are evaluated together?"
+  },
+  "python_functions": [
+    "manova()"
+  ],
+  "category": "multivariate",
+  "plain_explanation": {
+    "purpose": "Compares groups on several numbers at the same time, instead of one at a time.",
+    "when_to_use_plain": "When there is more than one outcome measure and you want a single verdict.",
+    "data_needed": "Several numeric outcome columns and a group column.",
+    "example": "Compare three training methods on reading and math scores together.",
+    "diagram": "groups A, B, C x measures 1, 2 -> do they differ overall?"
+  }
+}

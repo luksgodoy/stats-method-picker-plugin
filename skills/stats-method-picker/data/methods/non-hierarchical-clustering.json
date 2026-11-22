@@ -1,0 +1,31 @@
+{
+  "id": "non-hierarchical-clustering",
+  "name": "Non-hierarchical Clustering (k-means / DBSCAN)",
+  "when_to_use": "Standardized metric variables; k-means requires the number of clusters defined a priori, DBSCAN groups by density without defining k; preferable to hierarchical on larger datasets.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/multivariate/non_hierarchical_clustering.py"
+  ],
+  "r_functions": [
+    "kmeans()",
+    "dbscan()"
+  ],
+  "expected_input": {
+    "data_structure": "tabular",
+    "predictor_type": "metric",
+    "question": "How to group observations by similarity?",
+    "expected_scale": "standardized (0-1) or normalized"
+  },
+  "python_functions": [
+    "kmeans()",
+    "dbscan()"
+  ],
+  "category": "multivariate",
+  "plain_explanation": {
+    "purpose": "Splits items into a number of groups you choose (k-means) or into regions of high concentration (DBSCAN).",
+    "when_to_use_plain": "When the dataset is large and you already have an idea of how many groups you want, or want to isolate cases that belong to no group.",
+    "data_needed": "A table with one item per row and numeric columns, preferably on the same scale.",
+    "example": "Split customers into 4 purchase profiles; or find suppliers with out-of-pattern behavior.",
+    "diagram": "loose points -> random centers -> each point goes to the nearest center -> centers adjust -> repeat"
+  }
+}

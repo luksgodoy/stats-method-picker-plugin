@@ -1,0 +1,26 @@
+{
+  "id": "linear-programming",
+  "name": "Linear Programming (objective function and constraints formulation)",
+  "when_to_use": "Optimization problem with a linear objective function and linear constraints (e.g., maximize revenue subject to limited resources); conceptual material, no solver implementation in R.",
+  "code_status": "conceptual",
+  "sources": [
+    "analyses/optimization_simulation/linear_programming.py"
+  ],
+  "expected_input": {
+    "data_structure": "tabular",
+    "question": "How to formulate optimization problems with linear constraints?",
+    "note": "Conceptual material, no code implementation."
+  },
+  "python_functions": [
+    "optimize_production()"
+  ],
+  "category": "optimization_simulation",
+  "pdca_use": "Plan phase: formalize resource allocation among competing actions as an explicit objective function and constraints — deterministic, auditable step by step.",
+  "plain_explanation": {
+    "purpose": "Finds the best decision (maximum profit or minimum cost) while respecting resource limits.",
+    "when_to_use_plain": "When there is a clear goal and constraints that can be written as equations.",
+    "data_needed": "Goals, limits, and costs or gains per unit, as numbers.",
+    "example": "Decide how much to produce of each product with limited machine hours.",
+    "diagram": "feasible region (constraints) -> best point at a corner of the region"
+  }
+}

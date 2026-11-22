@@ -1,0 +1,29 @@
+{
+  "id": "anacor",
+  "name": "Simple Correspondence Analysis (CA)",
+  "when_to_use": "Two categorical variables (two-way contingency table); association tested by chi-square before generating the perceptual map.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/multivariate/anacor.py"
+  ],
+  "r_functions": [
+    "chisq.test()",
+    "FactoMineR::CA()"
+  ],
+  "expected_input": {
+    "data_structure": "contingency table",
+    "predictor_type": "categorical",
+    "question": "What is the association between two categorical variables?"
+  },
+  "python_functions": [
+    "anacor()"
+  ],
+  "category": "multivariate",
+  "plain_explanation": {
+    "purpose": "Shows on a map the relationship between two categories of a count table (who 'goes with' whom).",
+    "when_to_use_plain": "When you have two categorical variables (e.g., region x product) and want to see associations visually.",
+    "data_needed": "A table of counts crossing two categorical variables.",
+    "example": "See which regions buy more of which product types, on a single map.",
+    "diagram": "Rows and columns become points on the same plane; close points = strong association"
+  }
+}

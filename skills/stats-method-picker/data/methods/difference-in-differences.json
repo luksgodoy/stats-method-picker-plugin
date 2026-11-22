@@ -1,0 +1,27 @@
+{
+  "id": "difference-in-differences",
+  "name": "Difference-in-Differences (DiD)",
+  "when_to_use": "Intervention applied to one group at a point in time, with a comparable unaffected control group; compare the change (before→after) between the two groups to isolate the effect of the intervention.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/causal_special/difference_in_differences.py"
+  ],
+  "notes": "Compares the change in a group that received an intervention with the change in a similar group that did not, isolating the real effect. Applications: measure the impact of a policy/campaign by comparing before/after with a control group.",
+  "expected_input": {
+    "problem_type": "causal inference",
+    "data_structure": "panel (group x period)",
+    "question": "What is the causal effect of an intervention, isolated from trends that already existed?"
+  },
+  "python_functions": [
+    "difference_in_differences()"
+  ],
+  "category": "causal_special",
+  "pdca_use": "Check/Act phase: isolate the causal effect of an action implemented in a group/unit by comparing its change with an unaffected control unit — closed-form calculation (difference of means), but the parallel-trends assumption must be checked before use; cite this caveat to the user.",
+  "plain_explanation": {
+    "purpose": "Estimates the effect of a change by comparing who was affected with who was not, before and after.",
+    "when_to_use_plain": "When an intervention hit part of the cases and random assignment is not possible.",
+    "data_needed": "Outcome measure in two groups (affected and not), before and after.",
+    "example": "Measure the effect of a new policy in one region using another as reference.",
+    "diagram": "(after-before of affected group) - (after-before of reference group)"
+  }
+}

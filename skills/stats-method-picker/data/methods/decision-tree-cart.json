@@ -1,0 +1,34 @@
+{
+  "id": "decision-tree-cart",
+  "name": "Decision Tree / Regression Tree (CART)",
+  "when_to_use": "Categorical (classification) or continuous (regression) dependent variable; tabular data, no normality/linearity requirement; overfitting controlled via pruning (cp) and train-test validation.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/supervised_learning/decision_tree_cart.py"
+  ],
+  "r_functions": [
+    "rpart::rpart()",
+    "rpart.control()",
+    "rpart.plot()",
+    "caret::twoClassSummary"
+  ],
+  "expected_input": {
+    "dependent_variable_type": "categorical",
+    "problem_type": "supervised - classification",
+    "data_structure": "tabular",
+    "question": "How to predict with a decision-tree-based model?",
+    "expected_scale": "no specific assumption"
+  },
+  "python_functions": [
+    "classification_tree()",
+    "regression_tree()"
+  ],
+  "category": "supervised_learning",
+  "plain_explanation": {
+    "purpose": "Generates a sequence of yes/no questions leading to a decision or prediction.",
+    "when_to_use_plain": "When you need a rule that is easy to explain and draw.",
+    "data_needed": "A table with the response (category or number) and factor columns.",
+    "example": "Decide whether a customer is at high risk of canceling, through simple questions about usage and tenure.",
+    "diagram": "age > 30?\n yes -> income > 5k? ... | no -> ..."
+  }
+}

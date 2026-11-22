@@ -1,0 +1,27 @@
+{
+  "id": "bayesian-statistics",
+  "name": "Bayesian Statistics / Regression",
+  "when_to_use": "Same question as a traditional regression, but with prior knowledge to incorporate and/or little data; the answer comes out as a probability distribution (explicit uncertainty), not just a point estimate.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/regression/bayesian_statistics.py"
+  ],
+  "notes": "Same question as traditional regression, but incorporates prior knowledge and gives the uncertainty of the answer as a probability, not just a number. Applications: forecasting with little data, updating an estimate as new data arrive.",
+  "expected_input": {
+    "problem_type": "supervised - regression",
+    "data_structure": "tabular",
+    "question": "What is the estimate and its uncertainty, incorporating prior knowledge?"
+  },
+  "python_functions": [
+    "bayesian_regression()",
+    "beta_binomial_ab()"
+  ],
+  "category": "regression",
+  "plain_explanation": {
+    "purpose": "Updates an initial belief with the data, returning the chance of each possible value.",
+    "when_to_use_plain": "When there is useful prior knowledge or little data.",
+    "data_needed": "The observed data and a prior belief about what is expected.",
+    "example": "Estimate the conversion rate of a new campaign, starting from that of past campaigns.",
+    "diagram": "initial belief + new data = updated belief"
+  }
+}

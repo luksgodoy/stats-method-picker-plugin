@@ -1,0 +1,26 @@
+{
+  "id": "propensity-score-matching",
+  "name": "Propensity Score Matching",
+  "when_to_use": "Evaluate the effect of a treatment/program without random assignment; match treated and untreated cases with a similar profile (probability of treatment) before comparing the outcome.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/causal_special/propensity_score_matching.py"
+  ],
+  "notes": "Matches treated and untreated cases with a similar profile to compare outcomes as if it were an experiment. Applications: evaluate the effect of a program/training without a random control group.",
+  "expected_input": {
+    "problem_type": "causal inference",
+    "data_structure": "tabular",
+    "question": "What would the outcome of the treated have been had they not been treated, using similar cases as the counterfactual?"
+  },
+  "python_functions": [
+    "propensity_score_matching()"
+  ],
+  "category": "causal_special",
+  "plain_explanation": {
+    "purpose": "Compares treated and untreated cases that were similar from the start, to isolate the treatment effect.",
+    "when_to_use_plain": "When there was no random assignment and the groups differ in profile.",
+    "data_needed": "A 'treated/not' column, the outcome and profile factors for each case.",
+    "example": "Measure the effect of a training program on salary by comparing similar people.",
+    "diagram": "each treated -> similar untreated match -> compare outcomes"
+  }
+}

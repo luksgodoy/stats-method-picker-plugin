@@ -1,0 +1,26 @@
+{
+  "id": "integer-programming-transport",
+  "name": "Integer Programming / Transportation and Assignment Problem",
+  "when_to_use": "Optimization problem (complements 23-programacao-linear/23-metodo-simplex) where the solution must be in whole numbers (not fractional), or a classic distribution problem between origins and destinations at minimum cost.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/optimization_simulation/integer_programming_transport.py"
+  ],
+  "notes": "Complements the already cataloged Linear Programming/Simplex for when the solution must be in whole numbers (not fractional) or is a classic distribution problem. Applications: team allocation, routing, distribution between factories and distribution centers.",
+  "expected_input": {
+    "data_structure": "tabular (objective function and constraints)",
+    "question": "What is the minimum-cost allocation/distribution, given that the solution must be integer?"
+  },
+  "python_functions": [
+    "solve_transport_problem()"
+  ],
+  "category": "optimization_simulation",
+  "pdca_use": "Plan phase: minimum-cost allocation/distribution between origins and destinations (e.g., teams, inventory) when the solution must be in whole units — same deterministic nature as the Simplex.",
+  "plain_explanation": {
+    "purpose": "Plans what to ship from where to where at the lowest cost, in whole quantities.",
+    "when_to_use_plain": "When there are origins, destinations, route costs and limits.",
+    "data_needed": "Cost per route, supply of each origin and demand of each destination.",
+    "example": "Decide which factory supplies which distribution center.",
+    "diagram": "factories -> routes with cost -> centers (lowest total cost)"
+  }
+}

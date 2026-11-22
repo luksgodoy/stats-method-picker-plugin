@@ -1,0 +1,29 @@
+{
+  "id": "anova",
+  "name": "ANOVA (one-way / factorial) and post-hoc (Tukey)",
+  "when_to_use": "Compare the means of three or more groups at once; metric dependent variable, one or more categorical factors; post-hoc (Tukey) shows which pairs differ.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/hypothesis_tests/anova.py"
+  ],
+  "notes": "Same group comparison as the t-test, but for three or more groups at once, then showing which pairs differ from each other. Applications: compare 4 sales regions; compare 3 versions of a product.",
+  "expected_input": {
+    "problem_type": "hypothesis test",
+    "data_structure": "tabular",
+    "question": "Do the means of three or more groups differ, and which pairs?"
+  },
+  "python_functions": [
+    "one_way_anova()",
+    "factorial_anova()",
+    "tukey_post_hoc()"
+  ],
+  "category": "hypothesis_tests",
+  "pdca_use": "Check phase: compare the same indicator across three or more units/shifts/periods at once, with post-hoc showing which pairs differ — closed-form calculation, no model selection.",
+  "plain_explanation": {
+    "purpose": "Checks whether three or more groups have truly different means.",
+    "when_to_use_plain": "When comparing several versions, classes or regions on a number.",
+    "data_needed": "A numeric column and a group column with 3+ categories.",
+    "example": "Compare the average sales of 4 regions.",
+    "diagram": "A  B  C  D -> does any mean stand out? -> which ones?"
+  }
+}

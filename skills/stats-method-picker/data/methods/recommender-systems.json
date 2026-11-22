@@ -1,0 +1,26 @@
+{
+  "id": "recommender-systems",
+  "name": "Recommender Systems (collaborative filtering)",
+  "when_to_use": "User-item interaction history (purchase, rating, click); suggest items to a user based on what similar users preferred.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/causal_special/recommender_systems.py"
+  ],
+  "notes": "Suggests items to a user based on what similar users liked. Applications: product/content recommendation.",
+  "expected_input": {
+    "data_structure": "user-item matrix (interactions/ratings)",
+    "question": "What to recommend to a user, based on what similar users preferred?"
+  },
+  "python_functions": [
+    "item_item_recommendation()",
+    "svd_factorization_recommendation()"
+  ],
+  "category": "causal_special",
+  "plain_explanation": {
+    "purpose": "Suggests items to a person based on what similar people chose.",
+    "when_to_use_plain": "When there is a history of who consumed what and you want to suggest the next item.",
+    "data_needed": "Table with the person's identifier, the item's and, if available, the rating given.",
+    "example": "Suggest products to a customer based on what similar customers bought.",
+    "diagram": "you ~ similar people -> what they liked and you have not seen yet"
+  }
+}

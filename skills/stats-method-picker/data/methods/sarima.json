@@ -1,0 +1,25 @@
+{
+  "id": "sarima",
+  "name": "SARIMA (seasonal ARIMA)",
+  "when_to_use": "Time series with a clear seasonal component (monthly/quarterly cycle) in addition to trend and autocorrelation; extension of the already cataloged ARIMA (12-arima) with seasonal terms (P,D,Q)m.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/time_series/sarima.py"
+  ],
+  "notes": "Extension of the already cataloged ARIMA for when the pattern repeats in cycles (month, quarter). Applications: sales with year-end seasonality; energy consumption by season.",
+  "expected_input": {
+    "data_structure": "univariate time series",
+    "question": "How to forecast a time series whose pattern repeats in cycles?"
+  },
+  "python_functions": [
+    "fit_sarima()"
+  ],
+  "category": "time_series",
+  "plain_explanation": {
+    "purpose": "Forecasts series with strong periodic repetition (monthly, weekly) in addition to trend.",
+    "when_to_use_plain": "When the series has clear seasonality and you want a classical statistical model.",
+    "data_needed": "A column of values over time, regular, with several complete cycles.",
+    "example": "Forecast energy consumption month by month.",
+    "diagram": "series = trend + repeating cycle + remainder"
+  }
+}

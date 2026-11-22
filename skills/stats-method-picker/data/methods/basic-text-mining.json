@@ -1,0 +1,34 @@
+{
+  "id": "basic-text-mining",
+  "name": "Basic Text Mining (tokenization, stopwords, wordcloud, n-grams, word correlation)",
+  "when_to_use": "Text corpus (e.g., Project Gutenberg books); preliminary steps before any text modeling — tokenization, removal of stopwords/accents, stemming, bigrams, correlation between words.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/text/basic_text_mining.py"
+  ],
+  "r_functions": [
+    "tidytext::unnest_tokens()",
+    "gutenbergr::gutenberg_download()",
+    "wordcloud",
+    "SnowballC",
+    "widyr"
+  ],
+  "notes": "Depends on internet access for gutenberg_download().",
+  "expected_input": {
+    "data_structure": "text corpus",
+    "question": "What are the preliminary steps for analyzing a text corpus?"
+  },
+  "python_functions": [
+    "tokenize()",
+    "term_frequency()",
+    "ngrams()"
+  ],
+  "category": "text",
+  "plain_explanation": {
+    "purpose": "Prepares and counts words in texts to discover what is being talked about.",
+    "when_to_use_plain": "As the first step of any text analysis.",
+    "data_needed": "A column with free text, one document per row.",
+    "example": "Discover the most cited terms in expense descriptions.",
+    "diagram": "text -> split words -> remove empty words -> count"
+  }
+}

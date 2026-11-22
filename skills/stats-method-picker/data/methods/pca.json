@@ -1,0 +1,30 @@
+{
+  "id": "pca",
+  "name": "Principal Component Analysis (PCA)",
+  "when_to_use": "Metric variables correlated with one another; reduces dimensionality without assuming a theoretical latent structure; adequacy checked by KMO and Bartlett's test of sphericity before extracting components.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/multivariate/pca.py"
+  ],
+  "r_functions": [
+    "prcomp()",
+    "psych::KMO()",
+    "cortest.bartlett()"
+  ],
+  "expected_input": {
+    "data_structure": "tabular",
+    "predictor_type": "metric",
+    "question": "What is the dimensionality reduction that preserves variance?"
+  },
+  "python_functions": [
+    "principal_component_analysis()"
+  ],
+  "category": "multivariate",
+  "plain_explanation": {
+    "purpose": "Summarizes many correlated columns into a few 'overall scores', losing as little information as possible.",
+    "when_to_use_plain": "When there are many measures that say almost the same thing and you want to trim down or draw everything on a 2D chart.",
+    "data_needed": "A table with several numeric columns correlated with each other; at least a few dozen rows.",
+    "example": "Reduce 20 social indicators of each city to 2 axes to plot on a position map.",
+    "diagram": "20 columns  ->  [PCA]  ->  2 axes (score 1, score 2) + how much each axis explains"
+  }
+}

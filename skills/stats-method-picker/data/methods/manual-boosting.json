@@ -1,0 +1,27 @@
+{
+  "id": "manual-boosting",
+  "name": "Manual Boosting (gradient on residuals)",
+  "when_to_use": "Continuous dependent variable; illustrates the boosting principle (sequential fitting of residuals) before using ready-made gbm/xgboost.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/supervised_learning/manual_boosting.py"
+  ],
+  "r_functions": [
+    "rpart::rpart() applied iteratively on residuals"
+  ],
+  "expected_input": {
+    "data_structure": "univariate time series",
+    "question": "How to improve prediction by sequentially fitting residuals?"
+  },
+  "python_functions": [
+    "manual_boosting()"
+  ],
+  "category": "supervised_learning",
+  "plain_explanation": {
+    "purpose": "Builds a model in stages, each one correcting the errors of the previous.",
+    "when_to_use_plain": "When you want to understand in practice how boosting works, before using a library.",
+    "data_needed": "A table with the response and factor columns.",
+    "example": "Improve step by step the default forecast, correcting the badly predicted cases.",
+    "diagram": "model 1 -> errors -> model 2 focuses on the errors -> model 3 ..."
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "word-embeddings",
+  "name": "Word Embeddings (Word2Vec / GloVe)",
+  "when_to_use": "Need for semantic similarity between words/texts beyond term counts (complements 22-tfidf); represents words as numeric vectors where words with similar meaning end up close together.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/text/word_embeddings.py"
+  ],
+  "notes": "Represents words as numbers so that words with similar meaning are mathematically \"close\". Applications: semantic search, grouping similar answers even when different words are used.",
+  "expected_input": {
+    "data_structure": "text corpus",
+    "question": "Which words/texts have similar meaning, even when using different words?"
+  },
+  "python_functions": [
+    "train_embeddings()",
+    "similar_words()"
+  ],
+  "category": "text",
+  "plain_explanation": {
+    "purpose": "Turns words into numbers so that similar meanings end up close together.",
+    "when_to_use_plain": "When you want the computer to understand that different words can mean the same thing.",
+    "data_needed": "A large set of texts to learn the relationships.",
+    "example": "Search documents by meaning, not only by the exact word.",
+    "diagram": "'car' and 'automobile' end up close; 'banana' far away"
+  }
+}

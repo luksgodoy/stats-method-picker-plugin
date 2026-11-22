@@ -1,0 +1,28 @@
+{
+  "id": "hlm3",
+  "name": "Multilevel Model HLM3 (3 levels)",
+  "when_to_use": "Hierarchical data on 3 levels (e.g., repeated measures within students within schools).",
+  "code_status": "needs-adaptation",
+  "sources": [
+    "analyses/regression/hlm3.py"
+  ],
+  "r_functions": [
+    "manual computation of ICC and predictions from a pre-fitted lme() object"
+  ],
+  "expected_input": {
+    "data_structure": "hierarchical data",
+    "question": "How to decompose variance between and within hierarchical levels?",
+    "note": "Needs adaptation before running (see the notes field)."
+  },
+  "python_functions": [
+    "hlm3()"
+  ],
+  "category": "regression",
+  "plain_explanation": {
+    "purpose": "Same as the two-level one, but with three layers of groups nested within each other.",
+    "when_to_use_plain": "When there are three levels: for example student, school and municipality.",
+    "data_needed": "One row per item, columns identifying the two groups above and factors for the three levels.",
+    "example": "Explain student scores considering school and municipality at the same time.",
+    "diagram": "municipality -> schools -> students"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "naive-bayes-general",
+  "name": "Naive Bayes (general classification, beyond text)",
+  "when_to_use": "Classification with categorical (or discretized) predictors, few observations, assuming conditional independence between predictors given the class; complements 22-classificacao-texto-naive-bayes beyond the document-term matrix.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/supervised_learning/naive_bayes_general.py"
+  ],
+  "notes": "The catalog already has Naive Bayes for text; the general version applies the same probabilistic logic to any categorical variable. Applications: fast classification with few observations and categorical variables, outside the text domain.",
+  "expected_input": {
+    "dependent_variable_type": "categorical",
+    "problem_type": "supervised - classification",
+    "data_structure": "tabular",
+    "question": "What is the most probable class of a case, combining the probability of each characteristic?"
+  },
+  "python_functions": [
+    "gaussian_naive_bayes()",
+    "multinomial_naive_bayes()",
+    "bernoulli_naive_bayes()"
+  ],
+  "category": "supervised_learning",
+  "plain_explanation": {
+    "purpose": "Estimates the chance of each category by adding up the evidence from each factor, simply and quickly.",
+    "when_to_use_plain": "When you want a fast classifier, even with few examples.",
+    "data_needed": "Factor columns (numbers or categories) and the known category.",
+    "example": "Predict whether a ticket is urgent from its characteristics.",
+    "diagram": "evidence 1 x evidence 2 x ... -> chance per category"
+  }
+}

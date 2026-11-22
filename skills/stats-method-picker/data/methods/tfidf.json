@@ -1,0 +1,29 @@
+{
+  "id": "tfidf",
+  "name": "TF-IDF (Term Frequency - Inverse Document Frequency)",
+  "when_to_use": "Identify the most important/distinctive words per document within a corpus (comparing two or more documents); the variable is term frequency per document.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/text/tfidf.py"
+  ],
+  "r_functions": [
+    "tidytext::bind_tf_idf()",
+    "unnest_tokens()"
+  ],
+  "notes": "Depends on internet access for gutenberg_download().",
+  "expected_input": {
+    "data_structure": "text corpus",
+    "question": "Which words most distinguish documents in a corpus?"
+  },
+  "python_functions": [
+    "vectorize_tfidf()"
+  ],
+  "category": "text",
+  "plain_explanation": {
+    "purpose": "Gives each word an importance score: high if frequent in one text and rare in the others.",
+    "when_to_use_plain": "When you want to find the words that truly characterize each document.",
+    "data_needed": "A text column, one document per row.",
+    "example": "Find the terms that distinguish each group of complaints.",
+    "diagram": "word common to all -> low score | word only in this text -> high score"
+  }
+}

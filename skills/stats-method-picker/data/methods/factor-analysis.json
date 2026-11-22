@@ -1,0 +1,25 @@
+{
+  "id": "factor-analysis",
+  "name": "Factor Analysis",
+  "when_to_use": "Many metric variables correlated with each other (e.g., questionnaire items); reduce to a few latent factors that explain the common pattern, with adequacy checks (KMO, Bartlett's test of sphericity) before extraction.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/multivariate/factor_analysis.py"
+  ],
+  "expected_input": {
+    "problem_type": "dimensionality reduction",
+    "data_structure": "tabular",
+    "question": "Which latent dimensions explain the correlation among many observed variables?"
+  },
+  "python_functions": [
+    "factor_analysis()"
+  ],
+  "category": "multivariate",
+  "plain_explanation": {
+    "purpose": "Discovers a few hidden factors that explain the answers to many questions.",
+    "when_to_use_plain": "When several questions measure the same concept, such as satisfaction, and you want to confirm it.",
+    "data_needed": "A table with many correlated numeric columns, such as questionnaire scores.",
+    "example": "Reduce 15 survey questions to 3 dimensions: price, service, product.",
+    "diagram": "hidden factor -> reflects -> questions 1, 2, 3"
+  }
+}

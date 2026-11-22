@@ -1,0 +1,28 @@
+{
+  "id": "ab-test-experiment-design",
+  "name": "Design of Experiments / A/B Testing",
+  "when_to_use": "Decide between two or more versions of something (page, email, process) before scaling; random assignment to groups and statistical comparison of the result.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/hypothesis_tests/ab_test_experiment_design.py"
+  ],
+  "notes": "Formalizes how to split groups and measure the outcome so that cause and effect can be claimed with statistical confidence. Applications: test two versions of a page, email or process before scaling.",
+  "expected_input": {
+    "problem_type": "causal inference / hypothesis test",
+    "data_structure": "tabular",
+    "question": "How to design and measure an experiment so that cause and effect can be claimed with confidence?"
+  },
+  "python_functions": [
+    "ab_test_proportions()",
+    "ab_sample_size()"
+  ],
+  "category": "hypothesis_tests",
+  "pdca_use": "Plan/Check phase: size the sample and statistically compare two versions of an action before scaling — closed-form formulas (proportions/sample size), no model fitting.",
+  "plain_explanation": {
+    "purpose": "Compares two randomly assigned versions (A and B) to see which works better, and plans the size of the test.",
+    "when_to_use_plain": "When you can randomly choose who sees what.",
+    "data_needed": "For each participant, the version received and the outcome (e.g., converted or not).",
+    "example": "Test which of two emails gets more replies.",
+    "diagram": "audience -> random draw -> version A | version B -> compare rates"
+  }
+}

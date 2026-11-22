@@ -1,0 +1,27 @@
+{
+  "id": "association-rules",
+  "name": "Association Rules (Apriori / Market Basket)",
+  "when_to_use": "Transactions with item sets (e.g., shopping cart); find item combinations that appear together more often than a minimum support/confidence.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/causal_special/association_rules.py"
+  ],
+  "notes": "Finds item combinations that tend to appear together in the same transaction. Applications: \"customers who buy X also buy Y\" in retail/e-commerce.",
+  "expected_input": {
+    "problem_type": "unsupervised",
+    "data_structure": "transactional (list of items per transaction)",
+    "question": "Which items tend to appear together in the same transaction?"
+  },
+  "python_functions": [
+    "frequent_itemsets()",
+    "generate_rules()"
+  ],
+  "category": "causal_special",
+  "plain_explanation": {
+    "purpose": "Discovers what tends to appear together ('whoever takes A also takes B').",
+    "when_to_use_plain": "When there are item lists per transaction and you want to find frequent combinations.",
+    "data_needed": "List of transactions, each with the items it contains.",
+    "example": "Discover which products are bought together.",
+    "diagram": "{bread, milk} -> butter (confidence 70%)"
+  }
+}

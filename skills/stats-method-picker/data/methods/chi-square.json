@@ -1,0 +1,28 @@
+{
+  "id": "chi-square",
+  "name": "Chi-square (independence / goodness of fit)",
+  "when_to_use": "Two categorical variables arranged in a contingency table; test whether they are associated (independence) or whether an observed distribution matches an expected one (goodness of fit).",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/hypothesis_tests/chi_square.py"
+  ],
+  "notes": "Checks whether two categorical variables (e.g., gender x product preference) are related or whether it is coincidence. Applications: satisfaction survey cross-tabulated with customer profile.",
+  "expected_input": {
+    "problem_type": "hypothesis test",
+    "data_structure": "tabular",
+    "question": "Are two categorical variables associated, or is it coincidence?"
+  },
+  "python_functions": [
+    "chi_square_independence()",
+    "chi_square_goodness_of_fit()"
+  ],
+  "category": "hypothesis_tests",
+  "pdca_use": "Check phase: verify whether the distribution of a cause/category (e.g., type of nonconformity) changed after the action, or whether two categorical causes are associated.",
+  "plain_explanation": {
+    "purpose": "Checks whether two categorical variables are related or independent.",
+    "when_to_use_plain": "When two categories are cross-tabulated and you want to know whether the link is real.",
+    "data_needed": "A table of counts crossing two categorical columns.",
+    "example": "See whether the acquisition channel influences the type of plan chosen.",
+    "diagram": "observed vs. expected if there were no relationship -> large difference = relationship"
+  }
+}

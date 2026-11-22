@@ -1,0 +1,30 @@
+{
+  "id": "binary-logistic-regression",
+  "name": "Binary Logistic Regression",
+  "when_to_use": "Binary dependent variable (0/1); evaluation by log-likelihood, AIC/BIC, pseudo-R² and ROC curve.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/regression/binary_logistic_regression.py"
+  ],
+  "r_functions": [
+    "glm(family=\"binomial\")",
+    "logLik()"
+  ],
+  "expected_input": {
+    "dependent_variable_type": "binary",
+    "problem_type": "supervised - binary classification",
+    "data_structure": "tabular",
+    "question": "How to predict the probability of a category?"
+  },
+  "python_functions": [
+    "binary_logistic_regression()"
+  ],
+  "category": "regression",
+  "plain_explanation": {
+    "purpose": "Calculates the chance of something happening or not (yes/no) from factors.",
+    "when_to_use_plain": "When the outcome is of two types: bought/did not buy, paid/did not pay.",
+    "data_needed": "A response column with two values (0/1) and factor columns.",
+    "example": "Estimate the chance of a quote becoming a sale based on value and channel.",
+    "diagram": "factors -> [model] -> chance from 0% to 100% -> cutoff (e.g., above 50% = yes)"
+  }
+}

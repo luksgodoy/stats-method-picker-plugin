@@ -1,0 +1,26 @@
+{
+  "id": "mds",
+  "name": "Multidimensional Scaling (MDS)",
+  "when_to_use": "(Dis)similarity matrix between items; represent the items on a low-dimensional map preserving the perceived relative distances.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/multivariate/mds.py"
+  ],
+  "notes": "Turns a table of \"how similar two items are\" into a visual map where similar items sit close together. Applications: positioning map of competing brands from consumer perception.",
+  "expected_input": {
+    "problem_type": "dimensionality reduction",
+    "data_structure": "similarity matrix",
+    "question": "How to visualize, in a few dimensions, how similar or different the items are?"
+  },
+  "python_functions": [
+    "multidimensional_scaling()"
+  ],
+  "category": "multivariate",
+  "plain_explanation": {
+    "purpose": "Draws items on a map where distance on paper reflects similarity distance.",
+    "when_to_use_plain": "When you have similarities or distances between items and want to visualize them.",
+    "data_needed": "A table of distances/similarities between items, or numeric columns to compute them.",
+    "example": "Brand map according to customer perception.",
+    "diagram": "distance table -> 2D map: similar items sit close"
+  }
+}

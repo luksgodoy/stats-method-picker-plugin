@@ -1,0 +1,33 @@
+{
+  "id": "ann-perceptron",
+  "name": "Artificial Neural Network / Perceptron (neuralnet)",
+  "when_to_use": "Continuous (regression) or categorical (classification) dependent variable; standardized numeric predictors (0-1); compared in the material against Random Forest.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/supervised_learning/ann_perceptron.py"
+  ],
+  "r_functions": [
+    "neuralnet::neuralnet()",
+    "predict()",
+    "model.matrix()"
+  ],
+  "expected_input": {
+    "dependent_variable_type": "categorical",
+    "problem_type": "supervised - classification",
+    "data_structure": "tabular",
+    "question": "How to model nonlinear relationships with a simple neural network?",
+    "expected_scale": "standardized (0-1) or normalized"
+  },
+  "python_functions": [
+    "perceptron_classification()",
+    "perceptron_regression()"
+  ],
+  "category": "supervised_learning",
+  "plain_explanation": {
+    "purpose": "Minimal neural network, a single neuron, that learns to separate two classes with a line.",
+    "when_to_use_plain": "To learn the basic concept of a neural network or separate simple cases.",
+    "data_needed": "Numeric factor columns and a response with two classes.",
+    "example": "Classify messages as urgent or not, from two measures.",
+    "diagram": "inputs x weights -> sum -> exceeds threshold? -> yes/no"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "stl-decomposition",
+  "name": "STL Decomposition",
+  "when_to_use": "Time series to be diagnosed before choosing a model (ETS/ARIMA/Prophet); separate into trend, seasonality and residual in a way that is robust to outliers.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/time_series/stl_decomposition.py"
+  ],
+  "notes": "Separates a time series into trend, seasonality and residual, visually and robustly to outliers. Applications: quick diagnosis before choosing among the already cataloged time-series models (12-suavizacao-exponencial-ets, 12-arima, 12-prophet).",
+  "expected_input": {
+    "data_structure": "univariate time series",
+    "question": "What are the trend, seasonality and residual of a time series?"
+  },
+  "python_functions": [
+    "stl_decompose()"
+  ],
+  "category": "time_series",
+  "pdca_use": "Plan/Check phase: separate an indicator into trend, seasonality and residual before deciding whether a variation is a special cause or an expected seasonal pattern — closed-form decomposition, not a forecast.",
+  "plain_explanation": {
+    "purpose": "Separates a series into trend, seasonal cycle and remainder.",
+    "when_to_use_plain": "When you want to understand the series before forecasting, or remove seasonality.",
+    "data_needed": "A column of values over time, with regular period and at least 2 cycles.",
+    "example": "Separate the year-end rise from the real sales trend.",
+    "diagram": "series = trend + seasonality + residual"
+  }
+}

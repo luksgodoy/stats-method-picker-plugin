@@ -1,0 +1,29 @@
+{
+  "id": "multinomial-logistic-regression",
+  "name": "Multinomial Logistic Regression",
+  "when_to_use": "Nominal categorical dependent variable with three or more unordered categories.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/regression/multinomial_logistic_regression.py"
+  ],
+  "r_functions": [
+    "nnet::multinom()"
+  ],
+  "expected_input": {
+    "dependent_variable_type": "multinomial categorical",
+    "problem_type": "supervised - multiclass classification",
+    "data_structure": "tabular",
+    "question": "How to predict the probability of a category?"
+  },
+  "python_functions": [
+    "multinomial_logistic_regression()"
+  ],
+  "category": "regression",
+  "plain_explanation": {
+    "purpose": "Calculates the chance of each of several possible categories (more than two) from factors.",
+    "when_to_use_plain": "When the outcome is a choice among three or more options with no natural order.",
+    "data_needed": "A categorical response column with 3+ values and factor columns.",
+    "example": "Predict which of 3 plans a customer will choose, based on their profile.",
+    "diagram": "factors -> [model] -> chance of plan A, B and C (sum to 100%)"
+  }
+}

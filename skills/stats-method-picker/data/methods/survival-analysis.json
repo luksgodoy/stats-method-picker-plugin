@@ -1,0 +1,28 @@
+{
+  "id": "survival-analysis",
+  "name": "Survival Analysis (Kaplan-Meier, Cox)",
+  "when_to_use": "The dependent variable is the time until an event (which may not have occurred for all cases — censoring); Kaplan-Meier estimates the survival curve, Cox models the effect of covariates on the event hazard.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/supervised_learning/survival_analysis.py"
+  ],
+  "notes": "Models the time until an event happens (churn, failure, death) and measures the effect of factors on that time. Applications: time until subscription cancellation; time until equipment failure.",
+  "expected_input": {
+    "dependent_variable_type": "time to event (with censoring)",
+    "problem_type": "supervised - survival",
+    "data_structure": "tabular",
+    "question": "How long until an event occurs, and which factors speed it up or delay it?"
+  },
+  "python_functions": [
+    "kaplan_meier()",
+    "cox_regression()"
+  ],
+  "category": "supervised_learning",
+  "plain_explanation": {
+    "purpose": "Estimates how long it takes for an event to happen, even when some cases have not finished yet.",
+    "when_to_use_plain": "When the time until something happens matters: cancellation, failure, return.",
+    "data_needed": "For each item: observed time, whether the event occurred or not, and factors.",
+    "example": "Estimate how long a customer stays before canceling.",
+    "diagram": "100% customers ---\\___ 50% ---\\___ time"
+  }
+}

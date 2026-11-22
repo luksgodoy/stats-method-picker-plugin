@@ -1,0 +1,25 @@
+{
+  "id": "spatial-analysis",
+  "name": "Spatial Analysis / Geostatistics",
+  "when_to_use": "Data with geographic location (coordinates, municipality, region); account for the fact that nearby observations tend to be more alike (spatial autocorrelation) instead of treating each point as independent.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/causal_special/spatial_analysis.py"
+  ],
+  "expected_input": {
+    "data_structure": "geospatial data (point or area)",
+    "question": "How does the geographic location of each observation relate to the measured value?"
+  },
+  "python_functions": [
+    "moran_index()",
+    "spatial_clusters()"
+  ],
+  "category": "causal_special",
+  "plain_explanation": {
+    "purpose": "Analyzes data that has a place on the map, checking whether neighbors resemble each other.",
+    "when_to_use_plain": "When location matters for the outcome.",
+    "data_needed": "Values per location, with coordinates or a region identifier.",
+    "example": "See whether neighborhoods with a high incidence of a problem cluster together.",
+    "diagram": "map -> similar neighboring regions? -> clusters"
+  }
+}

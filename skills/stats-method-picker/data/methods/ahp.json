@@ -1,0 +1,25 @@
+{
+  "id": "ahp",
+  "name": "Analytic Hierarchy Process (AHP) / Gaussian AHP",
+  "when_to_use": "Multi-criteria decision with pairwise judgments between criteria/alternatives (comparison scale, e.g., Saaty); does not require a continuous statistical variable — it is structured subjective weighting. Gaussian AHP is a variant that dispenses with the traditional consistency check via the consistency ratio (CR).",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/optimization_simulation/ahp.py"
+  ],
+  "expected_input": {
+    "data_structure": "tabular",
+    "question": "How to rank alternatives according to multiple criteria?"
+  },
+  "python_functions": [
+    "ahp()"
+  ],
+  "category": "optimization_simulation",
+  "pdca_use": "Plan phase: prioritize among candidate actions through explicit pairwise judgment by the decision maker (not the library) — deterministic calculation over the supplied weights, useful for the Robot to document why an action was prioritized.",
+  "plain_explanation": {
+    "purpose": "Helps choose among options by comparing them two at a time across several criteria.",
+    "when_to_use_plain": "When the decision involves subjective criteria and needs to be made transparent.",
+    "data_needed": "Pairwise comparison scores given by people, between criteria and between options.",
+    "example": "Choose among three suppliers by price, lead time and quality.",
+    "diagram": "goal -> criteria -> options; summed weights give the final score"
+  }
+}

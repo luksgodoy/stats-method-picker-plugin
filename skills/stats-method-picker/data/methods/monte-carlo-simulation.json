@@ -1,0 +1,26 @@
+{
+  "id": "monte-carlo-simulation",
+  "name": "Monte Carlo Simulation",
+  "when_to_use": "The result depends on several uncertain variables with plausible ranges/distributions; generate thousands of random scenarios to estimate the distribution of the result and its risk.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/optimization_simulation/monte_carlo_simulation.py"
+  ],
+  "notes": "Tests thousands of random scenarios within plausible ranges to estimate the risk and variation of a result. Applications: cash-flow projection, project-duration estimation.",
+  "expected_input": {
+    "data_structure": "input parameters/distributions",
+    "question": "What is the risk and variation range of a result, given that several inputs are uncertain?"
+  },
+  "python_functions": [
+    "simulate_monte_carlo()"
+  ],
+  "category": "optimization_simulation",
+  "pdca_use": "Plan phase: project the risk/variation range of a result (e.g., duration, cost of an action) from explicit distributions provided by the planner — deterministic given the seed and parameters, does not learn patterns from data.",
+  "plain_explanation": {
+    "purpose": "Repeats a scenario with random draws thousands of times to see the range of possible outcomes.",
+    "when_to_use_plain": "When several factors are uncertain and you want the chance of each outcome.",
+    "data_needed": "Likely values (minimum, most likely, maximum) for each uncertainty.",
+    "example": "Estimate the chance of a project overrunning its deadline.",
+    "diagram": "draw values -> compute -> repeat 10,000x -> distribution of results"
+  }
+}

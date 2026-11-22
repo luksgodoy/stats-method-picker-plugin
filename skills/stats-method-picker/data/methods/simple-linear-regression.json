@@ -1,0 +1,30 @@
+{
+  "id": "simple-linear-regression",
+  "name": "Simple Linear Regression",
+  "when_to_use": "Continuous metric dependent variable, one metric predictor, linear relationship, normal and homoscedastic residuals.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/regression/simple_linear_regression.py"
+  ],
+  "r_functions": [
+    "lm()",
+    "anova()"
+  ],
+  "expected_input": {
+    "dependent_variable_type": "continuous metric",
+    "problem_type": "supervised - regression",
+    "data_structure": "tabular",
+    "question": "What is the linear relationship between the dependent variable and the predictors?"
+  },
+  "python_functions": [
+    "simple_linear_regression()"
+  ],
+  "category": "regression",
+  "plain_explanation": {
+    "purpose": "Measures how much one thing changes when another changes, and draws the best line linking the two.",
+    "when_to_use_plain": "When you want to predict a number from a single factor.",
+    "data_needed": "Two numeric columns: what you want to predict and the factor that explains it.",
+    "example": "Estimate monthly sales from ad investment.",
+    "diagram": "sales ^   . .  /\n      |  . /.\n      +------> ads  (line that best fits the points)"
+  }
+}

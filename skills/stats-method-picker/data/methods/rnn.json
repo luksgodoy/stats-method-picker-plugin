@@ -1,0 +1,29 @@
+{
+  "id": "rnn",
+  "name": "Recurrent Neural Network (RNN)",
+  "when_to_use": "Sequential/time-series data (e.g., climate humidity, stock price); continuous dependent variable; requires normalization (0-1) and formatting into a matrix by time steps.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/supervised_learning/rnn.py"
+  ],
+  "r_functions": [
+    "rnn::trainr()",
+    "rnn::predictr()"
+  ],
+  "expected_input": {
+    "data_structure": "univariate time series",
+    "question": "How to model nonlinear relationships with a simple neural network?",
+    "expected_scale": "standardized (0-1) or normalized"
+  },
+  "python_functions": [
+    "train_rnn()"
+  ],
+  "category": "supervised_learning",
+  "plain_explanation": {
+    "purpose": "Neural network that reads sequences keeping a memory of what it saw before.",
+    "when_to_use_plain": "When order matters: series over time or text.",
+    "data_needed": "Ordered sequences, such as values over time or words in a sentence.",
+    "example": "Predict the next value of a series from the last 30 days.",
+    "diagram": "step 1 -> step 2 -> step 3 (each passes memory to the next)"
+  }
+}

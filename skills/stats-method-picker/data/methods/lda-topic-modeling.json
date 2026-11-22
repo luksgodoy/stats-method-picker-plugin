@@ -1,0 +1,26 @@
+{
+  "id": "lda-topic-modeling",
+  "name": "Topic Modeling (LDA)",
+  "when_to_use": "Large set of texts with no prior topic label; complements 21-text-mining-basico/22-tfidf by automatically inferring the latent topics that explain the vocabulary of the documents.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/text/lda_topic_modeling.py"
+  ],
+  "notes": "Automatically finds the hidden \"topics\" in a large set of texts, with no prior label. Applications: discover recurring themes in open-ended survey answers.",
+  "expected_input": {
+    "problem_type": "unsupervised",
+    "data_structure": "text corpus",
+    "question": "Which latent topics explain a large set of texts, with no prior label?"
+  },
+  "python_functions": [
+    "model_topics()"
+  ],
+  "category": "text",
+  "plain_explanation": {
+    "purpose": "Automatically discovers the subjects that appear in a set of texts.",
+    "when_to_use_plain": "When there are many texts and nobody can read them all.",
+    "data_needed": "A text column, one document per row, in large volume.",
+    "example": "Discover the themes of thousands of complaints.",
+    "diagram": "texts -> [LDA] -> topic 1 (words), topic 2 (words)..."
+  }
+}

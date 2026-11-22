@@ -1,0 +1,32 @@
+{
+  "id": "multiple-linear-regression",
+  "name": "Multiple Linear Regression",
+  "when_to_use": "Continuous metric dependent variable, two or more predictors (metric and/or dummies); check multicollinearity (VIF/tolerance), stepwise selection, Box-Cox when residuals are not normal.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/regression/multiple_linear_regression.py"
+  ],
+  "r_functions": [
+    "lm()",
+    "step()",
+    "fastDummies::dummy_columns()"
+  ],
+  "expected_input": {
+    "dependent_variable_type": "continuous metric",
+    "problem_type": "supervised - regression",
+    "data_structure": "tabular",
+    "predictor_type": "categorical or metric (after encoding)",
+    "question": "What is the linear relationship between the dependent variable and the predictors?"
+  },
+  "python_functions": [
+    "multiple_linear_regression()"
+  ],
+  "category": "regression",
+  "plain_explanation": {
+    "purpose": "Predicts a number using several factors at once and shows the weight of each.",
+    "when_to_use_plain": "When more than one factor influences the result and you want to separate the effect of each.",
+    "data_needed": "A numeric column to predict and two or more factor columns; a few dozen rows at minimum.",
+    "example": "Estimate a company's revenue by size, sector and region, seeing how much each one weighs.",
+    "diagram": "price = base + a*size + b*age + c*neighborhood"
+  }
+}

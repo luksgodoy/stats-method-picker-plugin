@@ -1,0 +1,27 @@
+{
+  "id": "tsne-umap",
+  "name": "t-SNE / UMAP",
+  "when_to_use": "Data with many dimensions (dozens to hundreds of variables); reduce to 2D/3D preserving local neighborhood for visualization, not for downstream modeling.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/multivariate/tsne_umap.py"
+  ],
+  "notes": "Reduce many-dimensional data to 2D/3D to see patterns and clusters by eye. Applications: visualize customer or product clusters before running k-means/hierarchical.",
+  "expected_input": {
+    "problem_type": "dimensionality reduction",
+    "data_structure": "tabular",
+    "question": "How to visualize in 2D/3D a pattern that only exists in many dimensions?"
+  },
+  "python_functions": [
+    "tsne()",
+    "umap_reduction()"
+  ],
+  "category": "multivariate",
+  "plain_explanation": {
+    "purpose": "Draws data with many columns on a plane, keeping neighbors together, to see groups.",
+    "when_to_use_plain": "When you want to visually explore a complex dataset.",
+    "data_needed": "A numeric table with many columns.",
+    "example": "See natural clusters of documents or customers on a chart.",
+    "diagram": "hundreds of dimensions -> [projection] -> 2D map"
+  }
+}

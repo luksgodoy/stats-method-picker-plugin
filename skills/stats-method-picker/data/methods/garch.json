@@ -1,0 +1,25 @@
+{
+  "id": "garch",
+  "name": "GARCH",
+  "when_to_use": "Financial/risk time series whose volatility varies over time (conditional heteroskedasticity); model the variance, not only the mean level.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/time_series/garch.py"
+  ],
+  "notes": "Models how volatility varies over time, not only the mean value. Applications: financial risk, commodity prices, series with variable \"turbulence\".",
+  "expected_input": {
+    "data_structure": "univariate time series",
+    "question": "How does the volatility of a series vary over time?"
+  },
+  "python_functions": [
+    "fit_garch()"
+  ],
+  "category": "time_series",
+  "plain_explanation": {
+    "purpose": "Models the variation (volatility) of a series, which tends to come in calm and agitated waves.",
+    "when_to_use_plain": "When the interest is risk, not the value itself.",
+    "data_needed": "A column of values or returns over time, many points.",
+    "example": "Estimate the daily volatility of a financial asset.",
+    "diagram": "calm ~~~ agitated ^^^ calm ~~~ (variation also has memory)"
+  }
+}

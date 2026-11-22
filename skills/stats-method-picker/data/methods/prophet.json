@@ -1,0 +1,30 @@
+{
+  "id": "prophet",
+  "name": "Prophet",
+  "when_to_use": "Time series with multiple seasonality/holidays and nonlinear trend; robust to outliers and missing data.",
+  "code_status": "needs-adaptation",
+  "sources": [
+    "analyses/time_series/prophet.py"
+  ],
+  "r_functions": [
+    "prophet::prophet()",
+    "make_future_dataframe()",
+    "predict()"
+  ],
+  "expected_input": {
+    "data_structure": "univariate time series",
+    "question": "How to forecast a time series with multiple seasonality?",
+    "note": "Needs adaptation before running (see the notes field)."
+  },
+  "python_functions": [
+    "forecast_prophet()"
+  ],
+  "category": "time_series",
+  "plain_explanation": {
+    "purpose": "Forecasts series with strong seasonality and holidays, automatically and with little configuration.",
+    "when_to_use_plain": "When the series has a weekly/yearly pattern, gaps in the data or special dates.",
+    "data_needed": "Two columns: date and value; ideally months or years of history.",
+    "example": "Forecast daily visits to a website, with peaks on commemorative dates.",
+    "diagram": "series = trend + seasonality + holidays"
+  }
+}

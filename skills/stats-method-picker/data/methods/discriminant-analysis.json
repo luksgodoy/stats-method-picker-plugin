@@ -1,0 +1,27 @@
+{
+  "id": "discriminant-analysis",
+  "name": "Discriminant Analysis",
+  "when_to_use": "Known, labeled groups; categorical dependent variable, metric predictors; classify new cases from the characteristics that best separate the groups.",
+  "code_status": "own-implementation",
+  "sources": [
+    "analyses/multivariate/discriminant_analysis.py"
+  ],
+  "notes": "Uses known characteristics of already classified groups to predict which group a new case belongs to. Applications: classify customers as \"high risk\"/\"low risk\" for credit.",
+  "expected_input": {
+    "dependent_variable_type": "categorical",
+    "problem_type": "supervised - classification",
+    "data_structure": "tabular",
+    "question": "Which known group does a new case most likely belong to?"
+  },
+  "python_functions": [
+    "discriminant_analysis()"
+  ],
+  "category": "multivariate",
+  "plain_explanation": {
+    "purpose": "Creates a rule that separates already known groups using numeric measures.",
+    "when_to_use_plain": "When you want to classify new cases into existing groups and see what most differentiates the groups.",
+    "data_needed": "Numeric columns and a column with the known group.",
+    "example": "Distinguish good and bad payers by income, age and debts.",
+    "diagram": "two groups of points -> line that best separates them"
+  }
+}

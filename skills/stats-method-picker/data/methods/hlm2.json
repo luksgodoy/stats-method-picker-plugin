@@ -1,0 +1,29 @@
+{
+  "id": "hlm2",
+  "name": "Multilevel Model HLM2 (2 levels)",
+  "when_to_use": "Hierarchical data on 2 levels (e.g., students within schools), metric dependent variable; decomposes within- and between-group variance (ICC).",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/regression/hlm2.py"
+  ],
+  "r_functions": [
+    "nlme::lme()"
+  ],
+  "expected_input": {
+    "dependent_variable_type": "multinomial categorical",
+    "problem_type": "supervised - multiclass classification",
+    "data_structure": "hierarchical data",
+    "question": "How to decompose variance between and within hierarchical levels?"
+  },
+  "python_functions": [
+    "hlm2()"
+  ],
+  "category": "regression",
+  "plain_explanation": {
+    "purpose": "Does regression while respecting that items live in groups (group effect + individual effect).",
+    "when_to_use_plain": "When the data are nested on two levels and items in the same group resemble each other.",
+    "data_needed": "A table with one item per row, a column telling the group and factor columns for both levels.",
+    "example": "Explain student scores taking each student's school into account.",
+    "diagram": "Level 2: school -> Level 1: students within the school"
+  }
+}

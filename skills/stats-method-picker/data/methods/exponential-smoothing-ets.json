@@ -1,0 +1,31 @@
+{
+  "id": "exponential-smoothing-ets",
+  "name": "Exponential Smoothing (SES / Holt / Holt-Winters / ETS)",
+  "when_to_use": "Univariate time series; SES for constant level without trend/seasonality, Holt for trend, Holt-Winters/ETS for trend + seasonality.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/time_series/exponential_smoothing_ets.py"
+  ],
+  "r_functions": [
+    "forecast::ses()",
+    "forecast::holt()",
+    "forecast::hw()",
+    "forecast::ets()"
+  ],
+  "expected_input": {
+    "data_structure": "univariate time series",
+    "question": "How to smooth and extrapolate a time series?"
+  },
+  "python_functions": [
+    "simple_smoothing()",
+    "holt_winters()"
+  ],
+  "category": "time_series",
+  "plain_explanation": {
+    "purpose": "Forecasts the future of a series over time, giving more weight to recent data.",
+    "when_to_use_plain": "When there is a monthly or weekly series with trend and/or seasonality and you want a quick, simple forecast.",
+    "data_needed": "A column of values in time sequence, with regular dates; at least 2 complete cycles.",
+    "example": "Forecast sales for the next 6 months.",
+    "diagram": "past ------[more weight on recent]------> forecast"
+  }
+}

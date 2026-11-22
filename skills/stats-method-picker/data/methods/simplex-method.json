@@ -1,0 +1,26 @@
+{
+  "id": "simplex-method",
+  "name": "Simplex Method",
+  "when_to_use": "Solving a Linear Programming (LP) problem with more than two variables, seeking the optimal solution.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/optimization_simulation/simplex_method.py"
+  ],
+  "expected_input": {
+    "data_structure": "tabular",
+    "question": "What is the optimal solution of a linear programming problem?"
+  },
+  "python_functions": [
+    "manual_simplex()"
+  ],
+  "category": "optimization_simulation",
+  "pdca_use": "Plan phase: solve the resource allocation formulated as Linear Programming with a reproducible optimal solution (same problem, same answer every time).",
+  "plain_explanation": {
+    "purpose": "Procedure that solves linear programming problems by moving from corner to corner until reaching the best one.",
+    "when_to_use_plain": "To solve by hand or to understand how the solver works.",
+    "data_needed": "The same inputs as linear programming: goal, limits and coefficients.",
+    "example": "Solve a lowest-cost ingredient mix plan.",
+    "diagram": "corner 1 -> better neighboring corner -> ... -> optimal corner"
+  },
+  "notes": "Shiny app; requires the lpSolve, lpSolveAPI, shiny, readxl and writexl R packages."
+}

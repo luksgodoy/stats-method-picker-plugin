@@ -1,0 +1,29 @@
+{
+  "id": "negative-binomial",
+  "name": "Negative Binomial Regression",
+  "when_to_use": "Count dependent variable with overdispersion (variance greater than the mean), when Poisson does not fit.",
+  "code_status": "runnable",
+  "sources": [
+    "analyses/regression/negative_binomial.py"
+  ],
+  "r_functions": [
+    "MASS::glm.nb()"
+  ],
+  "expected_input": {
+    "dependent_variable_type": "count",
+    "problem_type": "supervised - generalized linear model",
+    "data_structure": "tabular",
+    "question": "How to model counts with overdispersion?"
+  },
+  "python_functions": [
+    "negative_binomial_regression()"
+  ],
+  "category": "regression",
+  "plain_explanation": {
+    "purpose": "Predicts counts like Poisson, but tolerates very 'spread out' data (many zeros and a few huge values).",
+    "when_to_use_plain": "When counts vary far more than normal, and Poisson becomes too optimistic.",
+    "data_needed": "A column of integer counts and factor columns.",
+    "example": "Predict how many documents each legislator issues per month, when a few issue almost everything.",
+    "diagram": "Poisson: narrow bars | Negative binomial: bars with a long right tail"
+  }
+}
