@@ -1,0 +1,1987 @@
+[
+  {
+    "id": "05-hierarchical-clustering",
+    "name": "Hierarchical Clustering",
+    "when_to_use": "Metric variables, no dependent variable (unsupervised); groups by distance matrix (Euclidean) and linkage method (single/complete/average/ward.D); number of groups decided from the dendrogram.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/multivariate/hierarchical_clustering.py"
+    ],
+    "r_functions": [
+      "dist()",
+      "hclust()",
+      "rect.hclust()",
+      "as.dendrogram()"
+    ],
+    "expected_input": {
+      "dependent_variable": null,
+      "problem_type": "unsupervised",
+      "data_structure": "distance matrix",
+      "predictor_type": "metric",
+      "question": "How to group observations by similarity?"
+    },
+    "python_functions": [
+      "hierarchical_clustering()"
+    ],
+    "category": "multivariate",
+    "plain_explanation": {
+      "purpose": "Joins similar items into groups, from most to least similar, forming a tree of groupings.",
+      "when_to_use_plain": "When you want to discover natural groups but do not know how many exist, and the dataset is small or medium.",
+      "data_needed": "A table with one item per row and several numeric measures per column (e.g., spending, age, frequency).",
+      "example": "Group similar municipalities on education indicators to compare each only with its peers.",
+      "diagram": "A B C D E  ->  (A B) (D E) C  ->  ((A B) C) (D E)  ->  all together"
+    }
+  },
+  {
+    "id": "05-non-hierarchical-clustering",
+    "name": "Non-hierarchical Clustering (k-means / DBSCAN)",
+    "when_to_use": "Standardized metric variables; k-means requires the number of clusters defined a priori, DBSCAN groups by density without defining k; preferable to hierarchical on larger datasets.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/multivariate/non_hierarchical_clustering.py"
+    ],
+    "r_functions": [
+      "kmeans()",
+      "dbscan()"
+    ],
+    "expected_input": {
+      "data_structure": "tabular",
+      "predictor_type": "metric",
+      "question": "How to group observations by similarity?",
+      "expected_scale": "standardized (0-1) or normalized"
+    },
+    "python_functions": [
+      "kmeans()",
+      "dbscan()"
+    ],
+    "category": "multivariate",
+    "plain_explanation": {
+      "purpose": "Splits items into a number of groups you choose (k-means) or into regions of high concentration (DBSCAN).",
+      "when_to_use_plain": "When the dataset is large and you already have an idea of how many groups you want, or want to isolate cases that belong to no group.",
+      "data_needed": "A table with one item per row and numeric columns, preferably on the same scale.",
+      "example": "Split customers into 4 purchase profiles; or find suppliers with out-of-pattern behavior.",
+      "diagram": "loose points -> random centers -> each point goes to the nearest center -> centers adjust -> repeat"
+    }
+  },
+  {
+    "id": "06-pca",
+    "name": "Principal Component Analysis (PCA)",
+    "when_to_use": "Metric variables correlated with one another; reduces dimensionality without assuming a theoretical latent structure; adequacy checked by KMO and Bartlett's test of sphericity before extracting components.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/multivariate/pca.py"
+    ],
+    "r_functions": [
+      "prcomp()",
+      "psych::KMO()",
+      "cortest.bartlett()"
+    ],
+    "expected_input": {
+      "data_structure": "tabular",
+      "predictor_type": "metric",
+      "question": "What is the dimensionality reduction that preserves variance?"
+    },
+    "python_functions": [
+      "principal_component_analysis()"
+    ],
+    "category": "multivariate",
+    "plain_explanation": {
+      "purpose": "Summarizes many correlated columns into a few 'overall scores', losing as little information as possible.",
+      "when_to_use_plain": "When there are many measures that say almost the same thing and you want to trim down or draw everything on a 2D chart.",
+      "data_needed": "A table with several numeric columns correlated with each other; at least a few dozen rows.",
+      "example": "Reduce 20 social indicators of each city to 2 axes to plot on a position map.",
+      "diagram": "20 columns  ->  [PCA]  ->  2 axes (score 1, score 2) + how much each axis explains"
+    }
+  },
+  {
+    "id": "07-anacor",
+    "name": "Simple Correspondence Analysis (CA)",
+    "when_to_use": "Two categorical variables (two-way contingency table); association tested by chi-square before generating the perceptual map.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/multivariate/anacor.py"
+    ],
+    "r_functions": [
+      "chisq.test()",
+      "FactoMineR::CA()"
+    ],
+    "expected_input": {
+      "data_structure": "contingency table",
+      "predictor_type": "categorical",
+      "question": "What is the association between two categorical variables?"
+    },
+    "python_functions": [
+      "anacor()"
+    ],
+    "category": "multivariate",
+    "plain_explanation": {
+      "purpose": "Shows on a map the relationship between two categories of a count table (who 'goes with' whom).",
+      "when_to_use_plain": "When you have two categorical variables (e.g., region x product) and want to see associations visually.",
+      "data_needed": "A table of counts crossing two categorical variables.",
+      "example": "See which regions buy more of which product types, on a single map.",
+      "diagram": "Rows and columns become points on the same plane; close points = strong association"
+    }
+  },
+  {
+    "id": "07-mca",
+    "name": "Multiple Correspondence Analysis (MCA)",
+    "when_to_use": "Three or more categorical variables simultaneously, when a single contingency table is not possible.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/multivariate/mca.py"
+    ],
+    "r_functions": [
+      "FactoMineR::MCA()"
+    ],
+    "expected_input": {
+      "data_structure": "contingency table",
+      "predictor_type": "categorical",
+      "question": "What is the association structure among categorical variables?"
+    },
+    "python_functions": [
+      "mca()"
+    ],
+    "category": "multivariate",
+    "plain_explanation": {
+      "purpose": "Makes the same map as correspondence analysis, but for several categorical variables at once.",
+      "when_to_use_plain": "When there are several multiple-choice questionnaires and you want to see which answers appear together.",
+      "data_needed": "A table with one respondent per row and several categorical columns (text or codes).",
+      "example": "See the answer profile of a satisfaction survey: whoever chooses 'excellent' also chooses what?",
+      "diagram": "answers to several questions -> single map: close answers appear together"
+    }
+  },
+  {
+    "id": "08-simple-linear-regression",
+    "name": "Simple Linear Regression",
+    "when_to_use": "Continuous metric dependent variable, one metric predictor, linear relationship, normal and homoscedastic residuals.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/regression/simple_linear_regression.py"
+    ],
+    "r_functions": [
+      "lm()",
+      "anova()"
+    ],
+    "expected_input": {
+      "dependent_variable_type": "continuous metric",
+      "problem_type": "supervised - regression",
+      "data_structure": "tabular",
+      "question": "What is the linear relationship between the dependent variable and the predictors?"
+    },
+    "python_functions": [
+      "simple_linear_regression()"
+    ],
+    "category": "regression",
+    "plain_explanation": {
+      "purpose": "Measures how much one thing changes when another changes, and draws the best line linking the two.",
+      "when_to_use_plain": "When you want to predict a number from a single factor.",
+      "data_needed": "Two numeric columns: what you want to predict and the factor that explains it.",
+      "example": "Estimate monthly sales from ad investment.",
+      "diagram": "sales ^   . .  /\n      |  . /.\n      +------> ads  (line that best fits the points)"
+    }
+  },
+  {
+    "id": "08-multiple-linear-regression",
+    "name": "Multiple Linear Regression",
+    "when_to_use": "Continuous metric dependent variable, two or more predictors (metric and/or dummies); check multicollinearity (VIF/tolerance), stepwise selection, Box-Cox when residuals are not normal.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/regression/multiple_linear_regression.py"
+    ],
+    "r_functions": [
+      "lm()",
+      "step()",
+      "fastDummies::dummy_columns()"
+    ],
+    "expected_input": {
+      "dependent_variable_type": "continuous metric",
+      "problem_type": "supervised - regression",
+      "data_structure": "tabular",
+      "predictor_type": "categorical or metric (after encoding)",
+      "question": "What is the linear relationship between the dependent variable and the predictors?"
+    },
+    "python_functions": [
+      "multiple_linear_regression()"
+    ],
+    "category": "regression",
+    "plain_explanation": {
+      "purpose": "Predicts a number using several factors at once and shows the weight of each.",
+      "when_to_use_plain": "When more than one factor influences the result and you want to separate the effect of each.",
+      "data_needed": "A numeric column to predict and two or more factor columns; a few dozen rows at minimum.",
+      "example": "Estimate a company's revenue by size, sector and region, seeing how much each one weighs.",
+      "diagram": "price = base + a*size + b*age + c*neighborhood"
+    }
+  },
+  {
+    "id": "09-binary-logistic-regression",
+    "name": "Binary Logistic Regression",
+    "when_to_use": "Binary dependent variable (0/1); evaluation by log-likelihood, AIC/BIC, pseudo-R² and ROC curve.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/regression/binary_logistic_regression.py"
+    ],
+    "r_functions": [
+      "glm(family=\"binomial\")",
+      "logLik()"
+    ],
+    "expected_input": {
+      "dependent_variable_type": "binary",
+      "problem_type": "supervised - binary classification",
+      "data_structure": "tabular",
+      "question": "How to predict the probability of a category?"
+    },
+    "python_functions": [
+      "binary_logistic_regression()"
+    ],
+    "category": "regression",
+    "plain_explanation": {
+      "purpose": "Calculates the chance of something happening or not (yes/no) from factors.",
+      "when_to_use_plain": "When the outcome is of two types: bought/did not buy, paid/did not pay.",
+      "data_needed": "A response column with two values (0/1) and factor columns.",
+      "example": "Estimate the chance of a quote becoming a sale based on value and channel.",
+      "diagram": "factors -> [model] -> chance from 0% to 100% -> cutoff (e.g., above 50% = yes)"
+    }
+  },
+  {
+    "id": "09-multinomial-logistic-regression",
+    "name": "Multinomial Logistic Regression",
+    "when_to_use": "Nominal categorical dependent variable with three or more unordered categories.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/regression/multinomial_logistic_regression.py"
+    ],
+    "r_functions": [
+      "nnet::multinom()"
+    ],
+    "expected_input": {
+      "dependent_variable_type": "multinomial categorical",
+      "problem_type": "supervised - multiclass classification",
+      "data_structure": "tabular",
+      "question": "How to predict the probability of a category?"
+    },
+    "python_functions": [
+      "multinomial_logistic_regression()"
+    ],
+    "category": "regression",
+    "plain_explanation": {
+      "purpose": "Calculates the chance of each of several possible categories (more than two) from factors.",
+      "when_to_use_plain": "When the outcome is a choice among three or more options with no natural order.",
+      "data_needed": "A categorical response column with 3+ values and factor columns.",
+      "example": "Predict which of 3 plans a customer will choose, based on their profile.",
+      "diagram": "factors -> [model] -> chance of plan A, B and C (sum to 100%)"
+    }
+  },
+  {
+    "id": "10-poisson-regression",
+    "name": "Poisson Regression",
+    "when_to_use": "Count dependent variable (integer, non-negative), assuming equidispersion (mean approximately equal to variance).",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/regression/poisson.py"
+    ],
+    "r_functions": [
+      "glm(family=\"poisson\")"
+    ],
+    "expected_input": {
+      "dependent_variable_type": "count",
+      "problem_type": "supervised - generalized linear model",
+      "data_structure": "tabular",
+      "question": "How to model a count dependent variable with equidispersion?"
+    },
+    "python_functions": [
+      "poisson_regression()"
+    ],
+    "category": "regression",
+    "plain_explanation": {
+      "purpose": "Predicts counts (how many times something happens) from factors.",
+      "when_to_use_plain": "When the outcome is a small integer: occurrences, calls, defects per period.",
+      "data_needed": "A column with counts (0, 1, 2...) and factor columns.",
+      "example": "Estimate the number of support tickets per week according to customer size.",
+      "diagram": "factors -> [model] -> expected count (e.g., 3.2 per week)"
+    }
+  },
+  {
+    "id": "10-negative-binomial",
+    "name": "Negative Binomial Regression",
+    "when_to_use": "Count dependent variable with overdispersion (variance greater than the mean), when Poisson does not fit.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/regression/negative_binomial.py"
+    ],
+    "r_functions": [
+      "MASS::glm.nb()"
+    ],
+    "expected_input": {
+      "dependent_variable_type": "count",
+      "problem_type": "supervised - generalized linear model",
+      "data_structure": "tabular",
+      "question": "How to model counts with overdispersion?"
+    },
+    "python_functions": [
+      "negative_binomial_regression()"
+    ],
+    "category": "regression",
+    "plain_explanation": {
+      "purpose": "Predicts counts like Poisson, but tolerates very 'spread out' data (many zeros and a few huge values).",
+      "when_to_use_plain": "When counts vary far more than normal, and Poisson becomes too optimistic.",
+      "data_needed": "A column of integer counts and factor columns.",
+      "example": "Predict how many documents each legislator issues per month, when a few issue almost everything.",
+      "diagram": "Poisson: narrow bars | Negative binomial: bars with a long right tail"
+    }
+  },
+  {
+    "id": "10-zip-zinb",
+    "name": "Zero-inflated models (ZIP / ZINB)",
+    "when_to_use": "Count dependent variable with excess zeros beyond what Poisson or Negative Binomial predicts.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/regression/zip_zinb.py"
+    ],
+    "r_functions": [
+      "pscl::zeroinfl()"
+    ],
+    "expected_input": {
+      "dependent_variable_type": "count",
+      "problem_type": "supervised - generalized linear model",
+      "data_structure": "tabular",
+      "question": "How to model counts with excess zeros?"
+    },
+    "python_functions": [
+      "zip_model()",
+      "zinb_model()"
+    ],
+    "category": "regression",
+    "plain_explanation": {
+      "purpose": "Predicts counts when there are excess zeros, treating 'never happens' separately from 'sometimes happens'.",
+      "when_to_use_plain": "When most items have zero and you need to understand why there are so many zeros.",
+      "data_needed": "A column of counts with many zeros and factor columns.",
+      "example": "Count accidents per company, where many companies never have any because of safety policy.",
+      "diagram": "item -> is it in the 'always zero' group? yes: 0 | no: normal count (0, 1, 2...)"
+    }
+  },
+  {
+    "id": "11-hlm2",
+    "name": "Multilevel Model HLM2 (2 levels)",
+    "when_to_use": "Hierarchical data on 2 levels (e.g., students within schools), metric dependent variable; decomposes within- and between-group variance (ICC).",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/regression/hlm2.py"
+    ],
+    "r_functions": [
+      "nlme::lme()"
+    ],
+    "expected_input": {
+      "dependent_variable_type": "multinomial categorical",
+      "problem_type": "supervised - multiclass classification",
+      "data_structure": "hierarchical data",
+      "question": "How to decompose variance between and within hierarchical levels?"
+    },
+    "python_functions": [
+      "hlm2()"
+    ],
+    "category": "regression",
+    "plain_explanation": {
+      "purpose": "Does regression while respecting that items live in groups (group effect + individual effect).",
+      "when_to_use_plain": "When the data are nested on two levels and items in the same group resemble each other.",
+      "data_needed": "A table with one item per row, a column telling the group and factor columns for both levels.",
+      "example": "Explain student scores taking each student's school into account.",
+      "diagram": "Level 2: school -> Level 1: students within the school"
+    }
+  },
+  {
+    "id": "11-hlm3",
+    "name": "Multilevel Model HLM3 (3 levels)",
+    "when_to_use": "Hierarchical data on 3 levels (e.g., repeated measures within students within schools).",
+    "code_status": "needs adaptation",
+    "sources": [
+      "analyses/regression/hlm3.py"
+    ],
+    "r_functions": [
+      "manual computation of ICC and predictions from a pre-fitted lme() object"
+    ],
+    "expected_input": {
+      "data_structure": "hierarchical data",
+      "question": "How to decompose variance between and within hierarchical levels?",
+      "note": "Needs adaptation before running (see the notes field)."
+    },
+    "python_functions": [
+      "hlm3()"
+    ],
+    "category": "regression",
+    "plain_explanation": {
+      "purpose": "Same as the two-level one, but with three layers of groups nested within each other.",
+      "when_to_use_plain": "When there are three levels: for example student, school and municipality.",
+      "data_needed": "One row per item, columns identifying the two groups above and factors for the three levels.",
+      "example": "Explain student scores considering school and municipality at the same time.",
+      "diagram": "municipality -> schools -> students"
+    }
+  },
+  {
+    "id": "12-exponential-smoothing-ets",
+    "name": "Exponential Smoothing (SES / Holt / Holt-Winters / ETS)",
+    "when_to_use": "Univariate time series; SES for constant level without trend/seasonality, Holt for trend, Holt-Winters/ETS for trend + seasonality.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/time_series/exponential_smoothing_ets.py"
+    ],
+    "r_functions": [
+      "forecast::ses()",
+      "forecast::holt()",
+      "forecast::hw()",
+      "forecast::ets()"
+    ],
+    "expected_input": {
+      "data_structure": "univariate time series",
+      "question": "How to smooth and extrapolate a time series?"
+    },
+    "python_functions": [
+      "simple_smoothing()",
+      "holt_winters()"
+    ],
+    "category": "time_series",
+    "plain_explanation": {
+      "purpose": "Forecasts the future of a series over time, giving more weight to recent data.",
+      "when_to_use_plain": "When there is a monthly or weekly series with trend and/or seasonality and you want a quick, simple forecast.",
+      "data_needed": "A column of values in time sequence, with regular dates; at least 2 complete cycles.",
+      "example": "Forecast sales for the next 6 months.",
+      "diagram": "past ------[more weight on recent]------> forecast"
+    }
+  },
+  {
+    "id": "12-arima",
+    "name": "ARIMA",
+    "when_to_use": "Stationary time series (or made stationary via differencing/Box-Cox), with relevant autocorrelation in the residuals.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/time_series/arima.py"
+    ],
+    "r_functions": [
+      "forecast::auto.arima()",
+      "stats::arima()",
+      "forecast::forecast()"
+    ],
+    "expected_input": {
+      "data_structure": "univariate time series",
+      "question": "How to model a time series with autocorrelation?"
+    },
+    "python_functions": [
+      "fit_arima()",
+      "select_arima_order()"
+    ],
+    "category": "time_series",
+    "plain_explanation": {
+      "purpose": "Forecasts a series using its own past behavior (inertia, corrections, shocks).",
+      "when_to_use_plain": "When the series depends on its past and you want a model more flexible than smoothing.",
+      "data_needed": "A column of values over time, at regular intervals, preferably 30+ points.",
+      "example": "Forecast next month's ticket volume.",
+      "diagram": "past values + past errors -> next value"
+    }
+  },
+  {
+    "id": "12-prophet",
+    "name": "Prophet",
+    "when_to_use": "Time series with multiple seasonality/holidays and nonlinear trend; robust to outliers and missing data.",
+    "code_status": "needs adaptation",
+    "sources": [
+      "analyses/time_series/prophet.py"
+    ],
+    "r_functions": [
+      "prophet::prophet()",
+      "make_future_dataframe()",
+      "predict()"
+    ],
+    "expected_input": {
+      "data_structure": "univariate time series",
+      "question": "How to forecast a time series with multiple seasonality?",
+      "note": "Needs adaptation before running (see the notes field)."
+    },
+    "python_functions": [
+      "forecast_prophet()"
+    ],
+    "category": "time_series",
+    "plain_explanation": {
+      "purpose": "Forecasts series with strong seasonality and holidays, automatically and with little configuration.",
+      "when_to_use_plain": "When the series has a weekly/yearly pattern, gaps in the data or special dates.",
+      "data_needed": "Two columns: date and value; ideally months or years of history.",
+      "example": "Forecast daily visits to a website, with peaks on commemorative dates.",
+      "diagram": "series = trend + seasonality + holidays"
+    }
+  },
+  {
+    "id": "15-decision-tree-cart",
+    "name": "Decision Tree / Regression Tree (CART)",
+    "when_to_use": "Categorical (classification) or continuous (regression) dependent variable; tabular data, no normality/linearity requirement; overfitting controlled via pruning (cp) and train-test validation.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/supervised_learning/decision_tree_cart.py"
+    ],
+    "r_functions": [
+      "rpart::rpart()",
+      "rpart.control()",
+      "rpart.plot()",
+      "caret::twoClassSummary"
+    ],
+    "expected_input": {
+      "dependent_variable_type": "categorical",
+      "problem_type": "supervised - classification",
+      "data_structure": "tabular",
+      "question": "How to predict with a decision-tree-based model?",
+      "expected_scale": "no specific assumption"
+    },
+    "python_functions": [
+      "classification_tree()",
+      "regression_tree()"
+    ],
+    "category": "supervised_learning",
+    "plain_explanation": {
+      "purpose": "Generates a sequence of yes/no questions leading to a decision or prediction.",
+      "when_to_use_plain": "When you need a rule that is easy to explain and draw.",
+      "data_needed": "A table with the response (category or number) and factor columns.",
+      "example": "Decide whether a customer is at high risk of canceling, through simple questions about usage and tenure.",
+      "diagram": "age > 30?\n yes -> income > 5k? ... | no -> ..."
+    }
+  },
+  {
+    "id": "15-bootstrapping",
+    "name": "Bootstrapping (confidence interval by resampling)",
+    "when_to_use": "Estimate the sampling distribution/confidence interval of a statistic (e.g., quantile, mean) without assuming normality; any numeric variable.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/supervised_learning/bootstrapping.py"
+    ],
+    "r_functions": [
+      "sample()",
+      "quantile()"
+    ],
+    "expected_input": {
+      "data_structure": "tabular",
+      "question": "What is the confidence interval of a statistic without assuming normality?",
+      "expected_scale": "no specific assumption"
+    },
+    "python_functions": [
+      "bootstrap_confidence_interval()"
+    ],
+    "category": "supervised_learning",
+    "plain_explanation": {
+      "purpose": "Estimates the uncertainty of a result by drawing data from the dataset itself many times.",
+      "when_to_use_plain": "When you want a confidence interval without relying on formulas that assume the shape of the data.",
+      "data_needed": "Any table; works even with few rows.",
+      "example": "Give an interval for the conversion rate of a small sample of opportunities.",
+      "diagram": "dataset -> resample with replacement 1000x -> compute 1000x -> range holding 95%"
+    }
+  },
+  {
+    "id": "15-bagging-random-forest",
+    "name": "Bagging / Random Forest",
+    "when_to_use": "Categorical or continuous dependent variable; reduces the variance of unstable trees; robust to outliers and nonlinearity; needs a medium/large dataset.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/supervised_learning/bagging_random_forest.py"
+    ],
+    "r_functions": [
+      "randomForest::randomForest()",
+      "caret::trainControl(method=\"repeatedcv\")",
+      "caret::train()"
+    ],
+    "expected_input": {
+      "dependent_variable_type": "categorical",
+      "problem_type": "supervised - classification",
+      "data_structure": "tabular",
+      "question": "How to reduce the variance of unstable models with multiple trees?"
+    },
+    "python_functions": [
+      "bagging()",
+      "random_forest()"
+    ],
+    "category": "supervised_learning",
+    "plain_explanation": {
+      "purpose": "Trains many different trees and uses their vote, giving more stable predictions.",
+      "when_to_use_plain": "When you want good accuracy without much tuning and with varied data.",
+      "data_needed": "A table with the response and several factor columns; hundreds of rows or more.",
+      "example": "Score the prospecting potential of each company.",
+      "diagram": "tree 1, tree 2, ... tree 500 -> vote -> final answer"
+    }
+  },
+  {
+    "id": "15-manual-boosting",
+    "name": "Manual Boosting (gradient on residuals)",
+    "when_to_use": "Continuous dependent variable; illustrates the boosting principle (sequential fitting of residuals) before using ready-made gbm/xgboost.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/supervised_learning/manual_boosting.py"
+    ],
+    "r_functions": [
+      "rpart::rpart() applied iteratively on residuals"
+    ],
+    "expected_input": {
+      "data_structure": "univariate time series",
+      "question": "How to improve prediction by sequentially fitting residuals?"
+    },
+    "python_functions": [
+      "manual_boosting()"
+    ],
+    "category": "supervised_learning",
+    "plain_explanation": {
+      "purpose": "Builds a model in stages, each one correcting the errors of the previous.",
+      "when_to_use_plain": "When you want to understand in practice how boosting works, before using a library.",
+      "data_needed": "A table with the response and factor columns.",
+      "example": "Improve step by step the default forecast, correcting the badly predicted cases.",
+      "diagram": "model 1 -> errors -> model 2 focuses on the errors -> model 3 ..."
+    }
+  },
+  {
+    "id": "15-xgboost",
+    "name": "XGBoost",
+    "when_to_use": "Categorical or continuous dependent variable; large data volumes, tolerates nonlinearity and interaction between variables; requires tuning (grid/cv).",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/supervised_learning/xgboost_wrapper.py"
+    ],
+    "r_functions": [
+      "caret::train(method=\"xgbTree\")"
+    ],
+    "expected_input": {
+      "dependent_variable_type": "categorical",
+      "problem_type": "supervised - classification",
+      "data_structure": "tabular",
+      "question": "How to improve prediction by sequentially fitting residuals?"
+    },
+    "python_functions": [
+      "xgboost_classification()",
+      "xgboost_regression()"
+    ],
+    "category": "supervised_learning",
+    "plain_explanation": {
+      "purpose": "Makes very accurate predictions by combining small trees that correct each other in sequence.",
+      "when_to_use_plain": "When accuracy matters more than explanation and there is plenty of tabular data.",
+      "data_needed": "A table with response and factors, hundreds of rows or more.",
+      "example": "Predict the sale probability of each opportunity to order the contact queue.",
+      "diagram": "tree 1 + tree 2 + ... + tree N = final prediction"
+    }
+  },
+  {
+    "id": "15-ann-perceptron",
+    "name": "Artificial Neural Network / Perceptron (neuralnet)",
+    "when_to_use": "Continuous (regression) or categorical (classification) dependent variable; standardized numeric predictors (0-1); compared in the material against Random Forest.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/supervised_learning/ann_perceptron.py"
+    ],
+    "r_functions": [
+      "neuralnet::neuralnet()",
+      "predict()",
+      "model.matrix()"
+    ],
+    "expected_input": {
+      "dependent_variable_type": "categorical",
+      "problem_type": "supervised - classification",
+      "data_structure": "tabular",
+      "question": "How to model nonlinear relationships with a simple neural network?",
+      "expected_scale": "standardized (0-1) or normalized"
+    },
+    "python_functions": [
+      "perceptron_classification()",
+      "perceptron_regression()"
+    ],
+    "category": "supervised_learning",
+    "plain_explanation": {
+      "purpose": "Minimal neural network, a single neuron, that learns to separate two classes with a line.",
+      "when_to_use_plain": "To learn the basic concept of a neural network or separate simple cases.",
+      "data_needed": "Numeric factor columns and a response with two classes.",
+      "example": "Classify messages as urgent or not, from two measures.",
+      "diagram": "inputs x weights -> sum -> exceeds threshold? -> yes/no"
+    }
+  },
+  {
+    "id": "16-ann-from-scratch",
+    "name": "Neural Network implemented from scratch (no framework)",
+    "when_to_use": "Teaching purposes; continuous dependent variable (e.g., wine quality); illustrates forward/backward propagation and gradient manually, without keras/tensorflow.",
+    "code_status": "needs adaptation",
+    "sources": [
+      "analyses/supervised_learning/ann_from_scratch.py"
+    ],
+    "r_functions": [
+      "custom functions (getLayerSize, initializeParameters, sigmoid, forwardPropagation, backwardPropagation, updateParameters, trainModel) — base R only"
+    ],
+    "expected_input": {
+      "data_structure": "tabular",
+      "question": "How to understand forward/backward propagation manually?",
+      "note": "Needs adaptation before running (see the notes field)."
+    },
+    "python_functions": [
+      "sigmoid()",
+      "ann_from_scratch()"
+    ],
+    "category": "supervised_learning",
+    "plain_explanation": {
+      "purpose": "Neural network built by hand, to understand how it learns by adjusting weights.",
+      "when_to_use_plain": "To study the inner workings, not for production.",
+      "data_needed": "A numeric table of factors and a response.",
+      "example": "Watch, step by step, a network learn to predict a score.",
+      "diagram": "input -> hidden layer -> output -> error -> correct the weights -> repeat"
+    }
+  },
+  {
+    "id": "17-ann-multilayer",
+    "name": "Multilayer Neural Network (neuralnet) — regression and classification",
+    "when_to_use": "Continuous (e.g., property value) or binary (e.g., admission) dependent variable; comparison with CART tree; architecture with multiple hidden layers.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/supervised_learning/ann_multilayer.py"
+    ],
+    "r_functions": [
+      "neuralnet::neuralnet(hidden=c(...))",
+      "compute()",
+      "rpart::rpart()"
+    ],
+    "expected_input": {
+      "dependent_variable_type": "binary",
+      "problem_type": "supervised - binary classification",
+      "data_structure": "tabular",
+      "question": "How to model complex relationships with a multilayer neural network?"
+    },
+    "python_functions": [
+      "mlp_classification()",
+      "mlp_regression()"
+    ],
+    "category": "supervised_learning",
+    "plain_explanation": {
+      "purpose": "Neural network with intermediate layers, which learns complex relationships among the factors.",
+      "when_to_use_plain": "When the relationship between factors and response is complicated and there is plenty of data.",
+      "data_needed": "A numeric table with a response; thousands of rows help.",
+      "example": "Predict a building's energy consumption from weather and occupancy.",
+      "diagram": "inputs -> layer 1 -> layer 2 -> output"
+    }
+  },
+  {
+    "id": "18-rnn",
+    "name": "Recurrent Neural Network (RNN)",
+    "when_to_use": "Sequential/time-series data (e.g., climate humidity, stock price); continuous dependent variable; requires normalization (0-1) and formatting into a matrix by time steps.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/supervised_learning/rnn.py"
+    ],
+    "r_functions": [
+      "rnn::trainr()",
+      "rnn::predictr()"
+    ],
+    "expected_input": {
+      "data_structure": "univariate time series",
+      "question": "How to model nonlinear relationships with a simple neural network?",
+      "expected_scale": "standardized (0-1) or normalized"
+    },
+    "python_functions": [
+      "train_rnn()"
+    ],
+    "category": "supervised_learning",
+    "plain_explanation": {
+      "purpose": "Neural network that reads sequences keeping a memory of what it saw before.",
+      "when_to_use_plain": "When order matters: series over time or text.",
+      "data_needed": "Ordered sequences, such as values over time or words in a sentence.",
+      "example": "Predict the next value of a series from the last 30 days.",
+      "diagram": "step 1 -> step 2 -> step 3 (each passes memory to the next)"
+    }
+  },
+  {
+    "id": "19-rbm-dbn",
+    "name": "Restricted Boltzmann Machine (RBM) / Deep Belief Network (DBN)",
+    "when_to_use": "Unsupervised/generative learning for images (reconstruction) and multiclass classification (e.g., MNIST/Fashion-MNIST digits); multilevel categorical dependent variable.",
+    "code_status": "needs adaptation",
+    "sources": [
+      "analyses/supervised_learning/rbm_dbn.py"
+    ],
+    "r_functions": [
+      "RBM::RBM()",
+      "RBM::StackRBM() (DBN)",
+      "RBM::ReconstructRBM()",
+      "RBM::PredictRBM()"
+    ],
+    "notes": "Depends on the RBM package installed via devtools::install_github(\"TimoMatzen/RBM\") — it is not on CRAN, not a standard installation.",
+    "expected_input": {
+      "dependent_variable": null,
+      "problem_type": "unsupervised",
+      "data_structure": "hierarchical data",
+      "question": "How to learn unsupervised representations of images?",
+      "note": "Needs adaptation before running (see the notes field)."
+    },
+    "python_functions": [
+      "rbm_feature_extraction()"
+    ],
+    "category": "supervised_learning",
+    "plain_explanation": {
+      "purpose": "Network that learns hidden patterns in the data on its own, with no labeled response needed.",
+      "when_to_use_plain": "To extract features automatically before classifying, or to study the subject.",
+      "data_needed": "A numeric table of factors, with no response column required.",
+      "example": "Discover recurring purchase patterns before building a model.",
+      "diagram": "data -> layers that summarize what repeats -> compact representation"
+    }
+  },
+  {
+    "id": "20-web-scraping",
+    "name": "Web Scraping",
+    "when_to_use": "Extraction of unstructured data from HTML pages (text, tables); not a statistical technique in itself, but a collection step before any analysis.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/text/web_scraping.py"
+    ],
+    "r_functions": [
+      "rvest::read_html()",
+      "html_elements()",
+      "html_text()",
+      "httr"
+    ],
+    "notes": "Depends on internet access at run time — not a code failure.",
+    "expected_input": {
+      "data_structure": "unstructured HTML",
+      "question": "How to extract structured data from HTML pages?"
+    },
+    "python_functions": [
+      "extract_by_tag()"
+    ],
+    "category": "text",
+    "plain_explanation": {
+      "purpose": "Automatically collects information published on web pages.",
+      "when_to_use_plain": "When the data is on a website and there is no ready download.",
+      "data_needed": "Addresses (URLs) of the pages and the description of the section to collect.",
+      "example": "Download news from a portal for later analysis.",
+      "diagram": "web page -> program reads the text -> organized table"
+    }
+  },
+  {
+    "id": "21-basic-text-mining",
+    "name": "Basic Text Mining (tokenization, stopwords, wordcloud, n-grams, word correlation)",
+    "when_to_use": "Text corpus (e.g., Project Gutenberg books); preliminary steps before any text modeling — tokenization, removal of stopwords/accents, stemming, bigrams, correlation between words.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/text/basic_text_mining.py"
+    ],
+    "r_functions": [
+      "tidytext::unnest_tokens()",
+      "gutenbergr::gutenberg_download()",
+      "wordcloud",
+      "SnowballC",
+      "widyr"
+    ],
+    "notes": "Depends on internet access for gutenberg_download().",
+    "expected_input": {
+      "data_structure": "text corpus",
+      "question": "What are the preliminary steps for analyzing a text corpus?"
+    },
+    "python_functions": [
+      "tokenize()",
+      "term_frequency()",
+      "ngrams()"
+    ],
+    "category": "text",
+    "plain_explanation": {
+      "purpose": "Prepares and counts words in texts to discover what is being talked about.",
+      "when_to_use_plain": "As the first step of any text analysis.",
+      "data_needed": "A column with free text, one document per row.",
+      "example": "Discover the most cited terms in expense descriptions.",
+      "diagram": "text -> split words -> remove empty words -> count"
+    }
+  },
+  {
+    "id": "22-tfidf",
+    "name": "TF-IDF (Term Frequency - Inverse Document Frequency)",
+    "when_to_use": "Identify the most important/distinctive words per document within a corpus (comparing two or more documents); the variable is term frequency per document.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/text/tfidf.py"
+    ],
+    "r_functions": [
+      "tidytext::bind_tf_idf()",
+      "unnest_tokens()"
+    ],
+    "notes": "Depends on internet access for gutenberg_download().",
+    "expected_input": {
+      "data_structure": "text corpus",
+      "question": "Which words most distinguish documents in a corpus?"
+    },
+    "python_functions": [
+      "vectorize_tfidf()"
+    ],
+    "category": "text",
+    "plain_explanation": {
+      "purpose": "Gives each word an importance score: high if frequent in one text and rare in the others.",
+      "when_to_use_plain": "When you want to find the words that truly characterize each document.",
+      "data_needed": "A text column, one document per row.",
+      "example": "Find the terms that distinguish each group of complaints.",
+      "diagram": "word common to all -> low score | word only in this text -> high score"
+    }
+  },
+  {
+    "id": "22-lexicon-sentiment-analysis",
+    "name": "Lexicon-based Sentiment Analysis (AFINN/Bing/NRC dictionaries)",
+    "when_to_use": "Polarity/emotion of text via a join with a ready-made lexicon, with no labeled/training data needed; English corpus in the material (e.g., Jane Austen novels).",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/text/lexicon_sentiment_analysis.py"
+    ],
+    "r_functions": [
+      "tidytext::get_sentiments(\"afinn\"/\"bing\"/\"nrc\")",
+      "inner_join()",
+      "janeaustenr::austen_books()"
+    ],
+    "expected_input": {
+      "data_structure": "text corpus",
+      "question": "What is the polarity/emotion of a text?"
+    },
+    "python_functions": [
+      "lexicon_sentiment()"
+    ],
+    "category": "text",
+    "plain_explanation": {
+      "purpose": "Measures whether a text is positive or negative by summing scores of words from a dictionary.",
+      "when_to_use_plain": "When you want an opinion thermometer without labeling anything.",
+      "data_needed": "A text column and a dictionary of words with scores.",
+      "example": "Measure the tone of customer reviews.",
+      "diagram": "'great' +2, 'delay' -1  ->  sum = +1  ->  positive"
+    }
+  },
+  {
+    "id": "22-text-classification-naive-bayes",
+    "name": "Text Classification (Naive Bayes on a document-term matrix)",
+    "when_to_use": "Supervised classification of sentiment/category (e.g., positive/negative) with labeled data; binary categorical dependent variable; requires a clean corpus (stopwords, stemming) and a sparse document-term matrix.",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/text/text_classification_naive_bayes.py"
+    ],
+    "r_functions": [
+      "tm::VCorpus()",
+      "tm::DocumentTermMatrix()",
+      "e1071::naiveBayes()",
+      "caret::confusionMatrix()"
+    ],
+    "expected_input": {
+      "dependent_variable_type": "binary",
+      "problem_type": "supervised - binary classification",
+      "data_structure": "text corpus",
+      "predictor_type": "document-term matrix",
+      "question": "How to classify documents with a probabilistic model?"
+    },
+    "python_functions": [
+      "classify_text()"
+    ],
+    "category": "text",
+    "plain_explanation": {
+      "purpose": "Classifies texts into categories by learning from already labeled examples.",
+      "when_to_use_plain": "When there are texts with a known category and you want to classify the new ones.",
+      "data_needed": "A text column and a column with the correct category, with a reasonable volume of examples.",
+      "example": "Classify an expense description by type.",
+      "diagram": "words of the text -> chance of each category -> the highest wins"
+    }
+  },
+  {
+    "id": "23-linear-programming",
+    "name": "Linear Programming (objective function and constraints formulation)",
+    "when_to_use": "Optimization problem with a linear objective function and linear constraints (e.g., maximize revenue subject to limited resources); conceptual material, no solver implementation in R.",
+    "code_status": "no code — conceptual material only",
+    "sources": [
+      "analyses/optimization_simulation/linear_programming.py"
+    ],
+    "expected_input": {
+      "data_structure": "tabular",
+      "question": "How to formulate optimization problems with linear constraints?",
+      "note": "Conceptual material, no code implementation."
+    },
+    "python_functions": [
+      "optimize_production()"
+    ],
+    "category": "optimization_simulation",
+    "pdca_use": "Plan phase: formalize resource allocation among competing actions as an explicit objective function and constraints — deterministic, auditable step by step.",
+    "plain_explanation": {
+      "purpose": "Finds the best decision (maximum profit or minimum cost) while respecting resource limits.",
+      "when_to_use_plain": "When there is a clear goal and constraints that can be written as equations.",
+      "data_needed": "Goals, limits, and costs or gains per unit, as numbers.",
+      "example": "Decide how much to produce of each product with limited machine hours.",
+      "diagram": "feasible region (constraints) -> best point at a corner of the region"
+    }
+  },
+  {
+    "id": "23-simplex-method",
+    "name": "Simplex Method",
+    "when_to_use": "Solving a Linear Programming (LP) problem with more than two variables, seeking the optimal solution.",
+    "code_status": "runs as is — Shiny app (requires the lpSolve, lpSolveAPI, shiny, readxl and writexl packages)",
+    "sources": [
+      "analyses/optimization_simulation/simplex_method.py"
+    ],
+    "expected_input": {
+      "data_structure": "tabular",
+      "question": "What is the optimal solution of a linear programming problem?"
+    },
+    "python_functions": [
+      "manual_simplex()"
+    ],
+    "category": "optimization_simulation",
+    "pdca_use": "Plan phase: solve the resource allocation formulated as Linear Programming with a reproducible optimal solution (same problem, same answer every time).",
+    "plain_explanation": {
+      "purpose": "Procedure that solves linear programming problems by moving from corner to corner until reaching the best one.",
+      "when_to_use_plain": "To solve by hand or to understand how the solver works.",
+      "data_needed": "The same inputs as linear programming: goal, limits and coefficients.",
+      "example": "Solve a lowest-cost ingredient mix plan.",
+      "diagram": "corner 1 -> better neighboring corner -> ... -> optimal corner"
+    }
+  },
+  {
+    "id": "29-ahp",
+    "name": "Analytic Hierarchy Process (AHP) / Gaussian AHP",
+    "when_to_use": "Multi-criteria decision with pairwise judgments between criteria/alternatives (comparison scale, e.g., Saaty); does not require a continuous statistical variable — it is structured subjective weighting. Gaussian AHP is a variant that dispenses with the traditional consistency check via the consistency ratio (CR).",
+    "code_status": "runs as is",
+    "sources": [
+      "analyses/optimization_simulation/ahp.py"
+    ],
+    "expected_input": {
+      "data_structure": "tabular",
+      "question": "How to rank alternatives according to multiple criteria?"
+    },
+    "python_functions": [
+      "ahp()"
+    ],
+    "category": "optimization_simulation",
+    "pdca_use": "Plan phase: prioritize among candidate actions through explicit pairwise judgment by the decision maker (not the library) — deterministic calculation over the supplied weights, useful for the Robot to document why an action was prioritized.",
+    "plain_explanation": {
+      "purpose": "Helps choose among options by comparing them two at a time across several criteria.",
+      "when_to_use_plain": "When the decision involves subjective criteria and needs to be made transparent.",
+      "data_needed": "Pairwise comparison scores given by people, between criteria and between options.",
+      "example": "Choose among three suppliers by price, lead time and quality.",
+      "diagram": "goal -> criteria -> options; summed weights give the final score"
+    }
+  },
+  {
+    "id": "t-test",
+    "name": "t-test (one-sample, two-sample, paired)",
+    "when_to_use": "Compare the mean of one group against a reference value, or the means of two groups (independent or paired); metric dependent variable, approximately normal.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/hypothesis_tests/t_test.py"
+    ],
+    "notes": "Compares the mean of one group with a reference value, or the means of two groups, and tells whether the observed difference is large enough not to be mere chance. Applications: before/after a campaign; comparing the performance of two branches.",
+    "expected_input": {
+      "problem_type": "hypothesis test",
+      "data_structure": "tabular",
+      "question": "Is the difference between the means of one or two groups statistically significant?"
+    },
+    "python_functions": [
+      "one_sample_t_test()",
+      "two_sample_t_test()"
+    ],
+    "category": "hypothesis_tests",
+    "pdca_use": "Check phase: compare an indicator before/after an action, or between two units, with an auditable numeric result (statistic and p-value), no free-form narrative.",
+    "plain_explanation": {
+      "purpose": "Checks whether the difference between the means of two groups is real or could be chance.",
+      "when_to_use_plain": "When comparing two groups on a number (e.g., before and after).",
+      "data_needed": "A numeric column and one that splits the data into two groups (or two measurements of the same item).",
+      "example": "See whether service time changed after a new process.",
+      "diagram": "group A: mean 10 | group B: mean 12 -> is the difference real?"
+    }
+  },
+  {
+    "id": "anova",
+    "name": "ANOVA (one-way / factorial) and post-hoc (Tukey)",
+    "when_to_use": "Compare the means of three or more groups at once; metric dependent variable, one or more categorical factors; post-hoc (Tukey) shows which pairs differ.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/hypothesis_tests/anova.py"
+    ],
+    "notes": "Same group comparison as the t-test, but for three or more groups at once, then showing which pairs differ from each other. Applications: compare 4 sales regions; compare 3 versions of a product.",
+    "expected_input": {
+      "problem_type": "hypothesis test",
+      "data_structure": "tabular",
+      "question": "Do the means of three or more groups differ, and which pairs?"
+    },
+    "python_functions": [
+      "one_way_anova()",
+      "factorial_anova()",
+      "tukey_post_hoc()"
+    ],
+    "category": "hypothesis_tests",
+    "pdca_use": "Check phase: compare the same indicator across three or more units/shifts/periods at once, with post-hoc showing which pairs differ — closed-form calculation, no model selection.",
+    "plain_explanation": {
+      "purpose": "Checks whether three or more groups have truly different means.",
+      "when_to_use_plain": "When comparing several versions, classes or regions on a number.",
+      "data_needed": "A numeric column and a group column with 3+ categories.",
+      "example": "Compare the average sales of 4 regions.",
+      "diagram": "A  B  C  D -> does any mean stand out? -> which ones?"
+    }
+  },
+  {
+    "id": "nonparametric-tests",
+    "name": "Non-parametric tests (Mann-Whitney, Wilcoxon, Kruskal-Wallis)",
+    "when_to_use": "Same group comparisons as the t-test/ANOVA, when the dependent variable is not normally distributed or the sample is small; ordinal or non-normal metric data.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/hypothesis_tests/nonparametric_tests.py"
+    ],
+    "notes": "The same group comparisons as the t-test/ANOVA, but without requiring the data to follow a normal distribution. Applications: data with outliers or small samples, common in internal surveys.",
+    "expected_input": {
+      "problem_type": "hypothesis test",
+      "data_structure": "tabular",
+      "question": "Do the groups differ when normality cannot be assumed?"
+    },
+    "python_functions": [
+      "mann_whitney()",
+      "paired_wilcoxon()",
+      "kruskal_wallis()"
+    ],
+    "category": "hypothesis_tests",
+    "pdca_use": "Check phase: same before/after or between-group comparison when the indicator is not normally distributed (common in small PDCA datasets) — still a deterministic calculation.",
+    "plain_explanation": {
+      "purpose": "Compare groups without assuming the data have a 'normal' shape.",
+      "when_to_use_plain": "When the sample is small, has extreme values or is a ranking (score from 1 to 5).",
+      "data_needed": "A column of values or ranks and a group column.",
+      "example": "Compare satisfaction scores between two stores.",
+      "diagram": "values -> become ranks (1st, 2nd...) -> compare ranks between groups"
+    }
+  },
+  {
+    "id": "chi-square",
+    "name": "Chi-square (independence / goodness of fit)",
+    "when_to_use": "Two categorical variables arranged in a contingency table; test whether they are associated (independence) or whether an observed distribution matches an expected one (goodness of fit).",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/hypothesis_tests/chi_square.py"
+    ],
+    "notes": "Checks whether two categorical variables (e.g., gender x product preference) are related or whether it is coincidence. Applications: satisfaction survey cross-tabulated with customer profile.",
+    "expected_input": {
+      "problem_type": "hypothesis test",
+      "data_structure": "tabular",
+      "question": "Are two categorical variables associated, or is it coincidence?"
+    },
+    "python_functions": [
+      "chi_square_independence()",
+      "chi_square_goodness_of_fit()"
+    ],
+    "category": "hypothesis_tests",
+    "pdca_use": "Check phase: verify whether the distribution of a cause/category (e.g., type of nonconformity) changed after the action, or whether two categorical causes are associated.",
+    "plain_explanation": {
+      "purpose": "Checks whether two categorical variables are related or independent.",
+      "when_to_use_plain": "When two categories are cross-tabulated and you want to know whether the link is real.",
+      "data_needed": "A table of counts crossing two categorical columns.",
+      "example": "See whether the acquisition channel influences the type of plan chosen.",
+      "diagram": "observed vs. expected if there were no relationship -> large difference = relationship"
+    }
+  },
+  {
+    "id": "correlation",
+    "name": "Correlation (Pearson / Spearman) with significance test",
+    "when_to_use": "Two metric variables (Pearson, linear relationship) or at least ordinal ones (Spearman, monotonic relationship); measure the strength and test the significance of the association before other modeling.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/hypothesis_tests/correlation.py"
+    ],
+    "notes": "Measures whether two numeric variables rise and fall together, and whether that relationship is strong enough to trust. Applications: check whether marketing spend tracks sales before running a regression.",
+    "expected_input": {
+      "data_structure": "tabular",
+      "question": "Do two numeric variables vary together, and is the relationship strong enough to trust?"
+    },
+    "python_functions": [
+      "pearson_correlation()",
+      "spearman_correlation()"
+    ],
+    "category": "hypothesis_tests",
+    "pdca_use": "Plan/Check phase: measure whether two indicators vary together (and how much) before proposing an action — auditable diagnosis, not a predictive model.",
+    "plain_explanation": {
+      "purpose": "Measures how much two things vary together, from -1 to +1.",
+      "when_to_use_plain": "When you want to know whether two numbers move together, without claiming that one causes the other.",
+      "data_needed": "Two or more numeric columns.",
+      "example": "See whether ad spend and sales rise together.",
+      "diagram": "+1: rise together | 0: no relationship | -1: one rises, the other falls"
+    }
+  },
+  {
+    "id": "factor-analysis",
+    "name": "Factor Analysis",
+    "when_to_use": "Many metric variables correlated with each other (e.g., questionnaire items); reduce to a few latent factors that explain the common pattern, with adequacy checks (KMO, Bartlett's test of sphericity) before extraction.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/multivariate/factor_analysis.py"
+    ],
+    "expected_input": {
+      "problem_type": "dimensionality reduction",
+      "data_structure": "tabular",
+      "question": "Which latent dimensions explain the correlation among many observed variables?"
+    },
+    "python_functions": [
+      "factor_analysis()"
+    ],
+    "category": "multivariate",
+    "plain_explanation": {
+      "purpose": "Discovers a few hidden factors that explain the answers to many questions.",
+      "when_to_use_plain": "When several questions measure the same concept, such as satisfaction, and you want to confirm it.",
+      "data_needed": "A table with many correlated numeric columns, such as questionnaire scores.",
+      "example": "Reduce 15 survey questions to 3 dimensions: price, service, product.",
+      "diagram": "hidden factor -> reflects -> questions 1, 2, 3"
+    }
+  },
+  {
+    "id": "discriminant-analysis",
+    "name": "Discriminant Analysis",
+    "when_to_use": "Known, labeled groups; categorical dependent variable, metric predictors; classify new cases from the characteristics that best separate the groups.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/multivariate/discriminant_analysis.py"
+    ],
+    "notes": "Uses known characteristics of already classified groups to predict which group a new case belongs to. Applications: classify customers as \"high risk\"/\"low risk\" for credit.",
+    "expected_input": {
+      "dependent_variable_type": "categorical",
+      "problem_type": "supervised - classification",
+      "data_structure": "tabular",
+      "question": "Which known group does a new case most likely belong to?"
+    },
+    "python_functions": [
+      "discriminant_analysis()"
+    ],
+    "category": "multivariate",
+    "plain_explanation": {
+      "purpose": "Creates a rule that separates already known groups using numeric measures.",
+      "when_to_use_plain": "When you want to classify new cases into existing groups and see what most differentiates the groups.",
+      "data_needed": "Numeric columns and a column with the known group.",
+      "example": "Distinguish good and bad payers by income, age and debts.",
+      "diagram": "two groups of points -> line that best separates them"
+    }
+  },
+  {
+    "id": "manova",
+    "name": "MANOVA",
+    "when_to_use": "Compare three or more groups on several metric dependent variables simultaneously, instead of running one ANOVA per variable.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/multivariate/manova.py"
+    ],
+    "notes": "Like ANOVA, but compares several numeric outcomes at once across groups, instead of one by one. Applications: compare 3 marketing campaigns on sales, clicks and retention simultaneously.",
+    "expected_input": {
+      "problem_type": "hypothesis test",
+      "data_structure": "tabular",
+      "question": "Do the groups differ when several metrics are evaluated together?"
+    },
+    "python_functions": [
+      "manova()"
+    ],
+    "category": "multivariate",
+    "plain_explanation": {
+      "purpose": "Compares groups on several numbers at the same time, instead of one at a time.",
+      "when_to_use_plain": "When there is more than one outcome measure and you want a single verdict.",
+      "data_needed": "Several numeric outcome columns and a group column.",
+      "example": "Compare three teaching methods on reading and math scores together.",
+      "diagram": "groups A, B, C x measures 1, 2 -> do they differ overall?"
+    }
+  },
+  {
+    "id": "mds",
+    "name": "Multidimensional Scaling (MDS)",
+    "when_to_use": "(Dis)similarity matrix between items; represent the items on a low-dimensional map preserving the perceived relative distances.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/multivariate/mds.py"
+    ],
+    "notes": "Turns a table of \"how similar two items are\" into a visual map where similar items sit close together. Applications: positioning map of competing brands from consumer perception.",
+    "expected_input": {
+      "problem_type": "dimensionality reduction",
+      "data_structure": "similarity matrix",
+      "question": "How to visualize, in a few dimensions, how similar or different the items are?"
+    },
+    "python_functions": [
+      "multidimensional_scaling()"
+    ],
+    "category": "multivariate",
+    "plain_explanation": {
+      "purpose": "Draws items on a map where distance on paper reflects similarity distance.",
+      "when_to_use_plain": "When you have similarities or distances between items and want to visualize them.",
+      "data_needed": "A table of distances/similarities between items, or numeric columns to compute them.",
+      "example": "Brand map according to customer perception.",
+      "diagram": "distance table -> 2D map: similar items sit close"
+    }
+  },
+  {
+    "id": "conjoint-analysis",
+    "name": "Conjoint Analysis",
+    "when_to_use": "Product/service described by combinable attributes and levels; respondents rate combinations; decompose total preference into the contribution of each attribute.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/multivariate/conjoint_analysis.py"
+    ],
+    "notes": "Decomposes customer preference for a product into the contributions of each characteristic (price, brand, color). Applications: decide which attribute combination maximizes purchase intent.",
+    "expected_input": {
+      "data_structure": "tabular (attribute-combination design)",
+      "question": "How much does each attribute of a product contribute to customer preference?"
+    },
+    "python_functions": [
+      "conjoint_analysis()"
+    ],
+    "category": "multivariate",
+    "plain_explanation": {
+      "purpose": "Discovers what people value most in a product, from choices among bundles.",
+      "when_to_use_plain": "When you need to know how much price, brand or lead time weigh in the purchase decision.",
+      "data_needed": "Answers from people ranking or choosing among attribute combinations.",
+      "example": "Find out whether the customer prefers to pay less or receive sooner.",
+      "diagram": "bundle A (cheap, slow) vs. bundle B (expensive, fast) -> weight of each attribute"
+    }
+  },
+  {
+    "id": "sarima",
+    "name": "SARIMA (seasonal ARIMA)",
+    "when_to_use": "Time series with a clear seasonal component (monthly/quarterly cycle) in addition to trend and autocorrelation; extension of the already cataloged ARIMA (12-arima) with seasonal terms (P,D,Q)m.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/time_series/sarima.py"
+    ],
+    "notes": "Extension of the already cataloged ARIMA for when the pattern repeats in cycles (month, quarter). Applications: sales with year-end seasonality; energy consumption by season.",
+    "expected_input": {
+      "data_structure": "univariate time series",
+      "question": "How to forecast a time series whose pattern repeats in cycles?"
+    },
+    "python_functions": [
+      "fit_sarima()"
+    ],
+    "category": "time_series",
+    "plain_explanation": {
+      "purpose": "Forecasts series with strong periodic repetition (monthly, weekly) in addition to trend.",
+      "when_to_use_plain": "When the series has clear seasonality and you want a classical statistical model.",
+      "data_needed": "A column of values over time, regular, with several complete cycles.",
+      "example": "Forecast energy consumption month by month.",
+      "diagram": "series = trend + repeating cycle + remainder"
+    }
+  },
+  {
+    "id": "var-granger-causality",
+    "name": "VAR Models / Granger Causality",
+    "when_to_use": "Two or more time series that potentially influence each other; model them jointly and test whether past values of one help predict another.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/time_series/var_granger_causality.py"
+    ],
+    "notes": "Models several time series that influence each other and tests whether one helps predict another. Applications: check whether media spend today explains sales in the following weeks.",
+    "expected_input": {
+      "data_structure": "multivariate time series",
+      "question": "Does one time series help predict another, and in which direction?"
+    },
+    "python_functions": [
+      "fit_var()",
+      "granger_causality()"
+    ],
+    "category": "time_series",
+    "plain_explanation": {
+      "purpose": "Analyzes several series together and tests whether the past of one helps predict another.",
+      "when_to_use_plain": "When you want to know whether one series drives another in time, without proving real causation.",
+      "data_needed": "Two or more series columns over the same period and frequency.",
+      "example": "See whether a change in ads precedes a change in sales.",
+      "diagram": "series A (past) ->? series B (future)"
+    }
+  },
+  {
+    "id": "garch",
+    "name": "GARCH",
+    "when_to_use": "Financial/risk time series whose volatility varies over time (conditional heteroskedasticity); model the variance, not only the mean level.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/time_series/garch.py"
+    ],
+    "notes": "Models how volatility varies over time, not only the mean value. Applications: financial risk, commodity prices, series with variable \"turbulence\".",
+    "expected_input": {
+      "data_structure": "univariate time series",
+      "question": "How does the volatility of a series vary over time?"
+    },
+    "python_functions": [
+      "fit_garch()"
+    ],
+    "category": "time_series",
+    "plain_explanation": {
+      "purpose": "Models the variation (volatility) of a series, which tends to come in calm and agitated waves.",
+      "when_to_use_plain": "When the interest is risk, not the value itself.",
+      "data_needed": "A column of values or returns over time, many points.",
+      "example": "Estimate the daily volatility of a financial asset.",
+      "diagram": "calm ~~~ agitated ^^^ calm ~~~ (variation also has memory)"
+    }
+  },
+  {
+    "id": "stl-decomposition",
+    "name": "STL Decomposition",
+    "when_to_use": "Time series to be diagnosed before choosing a model (ETS/ARIMA/Prophet); separate into trend, seasonality and residual in a way that is robust to outliers.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/time_series/stl_decomposition.py"
+    ],
+    "notes": "Separates a time series into trend, seasonality and residual, visually and robustly to outliers. Applications: quick diagnosis before choosing among the already cataloged time-series models (12-suavizacao-exponencial-ets, 12-arima, 12-prophet).",
+    "expected_input": {
+      "data_structure": "univariate time series",
+      "question": "What are the trend, seasonality and residual of a time series?"
+    },
+    "python_functions": [
+      "stl_decompose()"
+    ],
+    "category": "time_series",
+    "pdca_use": "Plan/Check phase: separate an indicator into trend, seasonality and residual before deciding whether a variation is a special cause or an expected seasonal pattern — closed-form decomposition, not a forecast.",
+    "plain_explanation": {
+      "purpose": "Separates a series into trend, seasonal cycle and remainder.",
+      "when_to_use_plain": "When you want to understand the series before forecasting, or remove seasonality.",
+      "data_needed": "A column of values over time, with regular period and at least 2 cycles.",
+      "example": "Separate the year-end rise from the real sales trend.",
+      "diagram": "series = trend + seasonality + residual"
+    }
+  },
+  {
+    "id": "ridge-lasso-regularization",
+    "name": "Regularization (Ridge / Lasso / Elastic Net)",
+    "when_to_use": "Linear/logistic regression with many candidate predictors and risk of overfitting or multicollinearity; penalizes large coefficients (Ridge), zeroes out the least useful (Lasso) or combines both (Elastic Net).",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/regression/ridge_lasso_regularization.py"
+    ],
+    "notes": "Versions of linear regression that penalize barely useful variables, avoiding a \"memorized\" model and helping to select predictors. Applications: many candidate variables and few observations (e.g., survey data).",
+    "expected_input": {
+      "problem_type": "supervised - regression/classification",
+      "data_structure": "tabular",
+      "question": "Which predictors really matter when there are many candidates and a risk of overfitting?"
+    },
+    "python_functions": [
+      "ridge()",
+      "lasso()",
+      "elastic_net()"
+    ],
+    "category": "regression",
+    "plain_explanation": {
+      "purpose": "Does regression with many factors 'taming' weights so as not to memorize noise.",
+      "when_to_use_plain": "When there are many factors, some redundant, and ordinary regression becomes unstable.",
+      "data_needed": "A table with a numeric response and many factor columns.",
+      "example": "Predict real-estate prices with 50 features, selecting the ones that matter.",
+      "diagram": "many factors -> penalize large weights -> few factors remain (Lasso zeroes)"
+    }
+  },
+  {
+    "id": "knn",
+    "name": "K-Nearest Neighbors (KNN)",
+    "when_to_use": "Classification or regression by similarity; categorical or metric dependent variable, metric/scaled predictors, no assumption of functional form.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/supervised_learning/knn.py"
+    ],
+    "notes": "Classifies or predicts a new case by looking at the most similar already-known cases. Applications: simple recommendation, diagnosis by profile similarity.",
+    "expected_input": {
+      "problem_type": "supervised - classification/regression",
+      "data_structure": "tabular",
+      "question": "What is the expected class or value of a new case, looking at the most similar already-known cases?"
+    },
+    "python_functions": [
+      "knn_classification()",
+      "knn_regression()"
+    ],
+    "category": "supervised_learning",
+    "plain_explanation": {
+      "purpose": "Classifies or predicts by looking at the most similar already-known neighbors.",
+      "when_to_use_plain": "When 'those who are alike behave alike' makes sense and the dataset is small.",
+      "data_needed": "A table with numeric factors and the known response of each case.",
+      "example": "Predict a new customer's plan from the 5 most similar customers.",
+      "diagram": "new point -> 5 nearest neighbors -> majority decides"
+    }
+  },
+  {
+    "id": "svm",
+    "name": "Support Vector Machine (SVM)",
+    "when_to_use": "Binary classification (or multiclass via extension) with a not necessarily linear boundary between classes (kernel); seeks the maximum separation margin between groups.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/supervised_learning/svm.py"
+    ],
+    "notes": "Finds the \"dividing line\" that separates two classes with the largest possible safety margin. Applications: binary classification with a non-obvious boundary between groups.",
+    "expected_input": {
+      "dependent_variable_type": "categorical",
+      "problem_type": "supervised - classification",
+      "data_structure": "tabular",
+      "question": "What is the boundary that separates two classes with the largest possible safety margin?"
+    },
+    "python_functions": [
+      "svm_classification()",
+      "svm_regression()"
+    ],
+    "category": "supervised_learning",
+    "plain_explanation": {
+      "purpose": "Finds the boundary that best separates two classes, with the most room possible.",
+      "when_to_use_plain": "When there are two classes and many factors, with a medium dataset.",
+      "data_needed": "Numeric factor columns and a response with two classes.",
+      "example": "Separate spam and non-spam emails.",
+      "diagram": "class A  ooo | line with margin | xxx  class B"
+    }
+  },
+  {
+    "id": "naive-bayes-geral",
+    "name": "Naive Bayes (general classification, beyond text)",
+    "when_to_use": "Classification with categorical (or discretized) predictors, few observations, assuming conditional independence between predictors given the class; complements 22-classificacao-texto-naive-bayes beyond the document-term matrix.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/supervised_learning/naive_bayes_general.py"
+    ],
+    "notes": "The catalog already has Naive Bayes for text; the general version applies the same probabilistic logic to any categorical variable. Applications: fast classification with few observations and categorical variables, outside the text domain.",
+    "expected_input": {
+      "dependent_variable_type": "categorical",
+      "problem_type": "supervised - classification",
+      "data_structure": "tabular",
+      "question": "What is the most probable class of a case, combining the probability of each characteristic?"
+    },
+    "python_functions": [
+      "gaussian_naive_bayes()",
+      "multinomial_naive_bayes()",
+      "bernoulli_naive_bayes()"
+    ],
+    "category": "supervised_learning",
+    "plain_explanation": {
+      "purpose": "Estimates the chance of each category by adding up the evidence from each factor, simply and quickly.",
+      "when_to_use_plain": "When you want a fast classifier, even with few examples.",
+      "data_needed": "Factor columns (numbers or categories) and the known category.",
+      "example": "Predict whether a ticket is urgent from its characteristics.",
+      "diagram": "evidence 1 x evidence 2 x ... -> chance per category"
+    }
+  },
+  {
+    "id": "gaussian-mixture-models",
+    "name": "Gaussian Mixture Models (GMM)",
+    "when_to_use": "Clustering when groups may overlap; instead of hard assignment (like k-means, already cataloged in 05-clustering-nao-hierarquico), estimates the probability of each case belonging to each group.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/multivariate/gaussian_mixture_models.py"
+    ],
+    "notes": "Clustering that, instead of hard groups, gives the probability of each case belonging to each group. Applications: customer segmentation with overlapping profiles.",
+    "expected_input": {
+      "problem_type": "unsupervised",
+      "data_structure": "tabular",
+      "question": "What is the probability of a case belonging to each of several latent groups?"
+    },
+    "python_functions": [
+      "gaussian_mixture()",
+      "choose_n_components()"
+    ],
+    "category": "multivariate",
+    "plain_explanation": {
+      "purpose": "Groups items allowing each to belong partially to several groups.",
+      "when_to_use_plain": "When groups overlap and you want a probability, not just a label.",
+      "data_needed": "Numeric table, one item per row.",
+      "example": "Segment customers who sit between two profiles.",
+      "diagram": "item: 70% group A, 30% group B"
+    }
+  },
+  {
+    "id": "tsne-umap",
+    "name": "t-SNE / UMAP",
+    "when_to_use": "Data with many dimensions (dozens to hundreds of variables); reduce to 2D/3D preserving local neighborhood for visualization, not for downstream modeling.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/multivariate/tsne_umap.py"
+    ],
+    "notes": "Reduce many-dimensional data to 2D/3D to see patterns and clusters by eye. Applications: visualize customer or product clusters before running k-means/hierarchical.",
+    "expected_input": {
+      "problem_type": "dimensionality reduction",
+      "data_structure": "tabular",
+      "question": "How to visualize in 2D/3D a pattern that only exists in many dimensions?"
+    },
+    "python_functions": [
+      "tsne()",
+      "umap_reduction()"
+    ],
+    "category": "multivariate",
+    "plain_explanation": {
+      "purpose": "Draws data with many columns on a plane, keeping neighbors together, to see groups.",
+      "when_to_use_plain": "When you want to visually explore a complex dataset.",
+      "data_needed": "A numeric table with many columns.",
+      "example": "See natural clusters of documents or customers on a chart.",
+      "diagram": "hundreds of dimensions -> [projection] -> 2D map"
+    }
+  },
+  {
+    "id": "association-rules",
+    "name": "Association Rules (Apriori / Market Basket)",
+    "when_to_use": "Transactions with item sets (e.g., shopping cart); find item combinations that appear together more often than a minimum support/confidence.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/causal_special/association_rules.py"
+    ],
+    "notes": "Finds item combinations that tend to appear together in the same transaction. Applications: \"customers who buy X also buy Y\" in retail/e-commerce.",
+    "expected_input": {
+      "problem_type": "unsupervised",
+      "data_structure": "transactional (list of items per transaction)",
+      "question": "Which items tend to appear together in the same transaction?"
+    },
+    "python_functions": [
+      "frequent_itemsets()",
+      "generate_rules()"
+    ],
+    "category": "causal_special",
+    "plain_explanation": {
+      "purpose": "Discovers what tends to appear together ('whoever takes A also takes B').",
+      "when_to_use_plain": "When there are item lists per transaction and you want to find frequent combinations.",
+      "data_needed": "List of transactions, each with the items it contains.",
+      "example": "Discover which products are bought together.",
+      "diagram": "{bread, milk} -> butter (confidence 70%)"
+    }
+  },
+  {
+    "id": "survival-analysis",
+    "name": "Survival Analysis (Kaplan-Meier, Cox)",
+    "when_to_use": "The dependent variable is the time until an event (which may not have occurred for all cases — censoring); Kaplan-Meier estimates the survival curve, Cox models the effect of covariates on the event hazard.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/supervised_learning/survival_analysis.py"
+    ],
+    "notes": "Models the time until an event happens (churn, failure, death) and measures the effect of factors on that time. Applications: time until subscription cancellation; time until equipment failure.",
+    "expected_input": {
+      "dependent_variable_type": "time to event (with censoring)",
+      "problem_type": "supervised - survival",
+      "data_structure": "tabular",
+      "question": "How long until an event occurs, and which factors speed it up or delay it?"
+    },
+    "python_functions": [
+      "kaplan_meier()",
+      "cox_regression()"
+    ],
+    "category": "supervised_learning",
+    "plain_explanation": {
+      "purpose": "Estimates how long it takes for an event to happen, even when some cases have not finished yet.",
+      "when_to_use_plain": "When the time until something happens matters: cancellation, failure, return.",
+      "data_needed": "For each item: observed time, whether the event occurred or not, and factors.",
+      "example": "Estimate how long a customer stays before canceling.",
+      "diagram": "100% customers ---\\___ 50% ---\\___ time"
+    }
+  },
+  {
+    "id": "anomaly-detection",
+    "name": "Anomaly Detection (Isolation Forest, LOF, One-Class SVM)",
+    "when_to_use": "Identify rare/atypical cases with no (or few) labeled examples of anomalies; learns the \"normal\" pattern of the data and flags what deviates.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/causal_special/anomaly_detection.py"
+    ],
+    "notes": "Learns the \"normal\" pattern of the data and flags the cases that deviate too much from it. Applications: transaction fraud, sensor failure, audit outliers.",
+    "expected_input": {
+      "problem_type": "unsupervised / semi-supervised",
+      "data_structure": "tabular",
+      "question": "Which cases deviate too much from the normal pattern of the data?"
+    },
+    "python_functions": [
+      "detect_anomalies_isolation_forest()",
+      "detect_anomalies_lof()"
+    ],
+    "category": "causal_special",
+    "plain_explanation": {
+      "purpose": "Flags cases very different from the pattern that deserve attention.",
+      "when_to_use_plain": "When looking for fraud, errors or rare failures.",
+      "data_needed": "Numeric table, one case per row, in reasonable volume.",
+      "example": "Find out-of-pattern expenses in a spending dataset.",
+      "diagram": "cloud of normal points + a few isolated points = anomalies"
+    }
+  },
+  {
+    "id": "difference-in-differences",
+    "name": "Difference-in-Differences (DiD)",
+    "when_to_use": "Intervention applied to one group at a point in time, with a comparable unaffected control group; compare the change (before→after) between the two groups to isolate the effect of the intervention.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/causal_special/difference_in_differences.py"
+    ],
+    "notes": "Compares the change in a group that received an intervention with the change in a similar group that did not, isolating the real effect. Applications: measure the impact of a policy/campaign by comparing before/after with a control group.",
+    "expected_input": {
+      "problem_type": "causal inference",
+      "data_structure": "panel (group x period)",
+      "question": "What is the causal effect of an intervention, isolated from trends that already existed?"
+    },
+    "python_functions": [
+      "difference_in_differences()"
+    ],
+    "category": "causal_special",
+    "pdca_use": "Check/Act phase: isolate the causal effect of an action implemented in a group/unit by comparing its change with an unaffected control unit — closed-form calculation (difference of means), but the parallel-trends assumption must be checked before use; cite this caveat to the user.",
+    "plain_explanation": {
+      "purpose": "Estimates the effect of a change by comparing who was affected with who was not, before and after.",
+      "when_to_use_plain": "When an intervention hit part of the cases and random assignment is not possible.",
+      "data_needed": "Outcome measure in two groups (affected and not), before and after.",
+      "example": "Measure the effect of a new policy in one region using another as reference.",
+      "diagram": "(after-before of affected group) - (after-before of reference group)"
+    }
+  },
+  {
+    "id": "propensity-score-matching",
+    "name": "Propensity Score Matching",
+    "when_to_use": "Evaluate the effect of a treatment/program without random assignment; match treated and untreated cases with a similar profile (probability of treatment) before comparing the outcome.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/causal_special/propensity_score_matching.py"
+    ],
+    "notes": "Matches treated and untreated cases with a similar profile to compare outcomes as if it were an experiment. Applications: evaluate the effect of a program/training without a random control group.",
+    "expected_input": {
+      "problem_type": "causal inference",
+      "data_structure": "tabular",
+      "question": "What would the outcome of the treated have been had they not been treated, using similar cases as the counterfactual?"
+    },
+    "python_functions": [
+      "propensity_score_matching()"
+    ],
+    "category": "causal_special",
+    "plain_explanation": {
+      "purpose": "Compares treated and untreated cases that were similar from the start, to isolate the treatment effect.",
+      "when_to_use_plain": "When there was no random assignment and the groups differ in profile.",
+      "data_needed": "A 'treated/not' column, the outcome and profile factors for each case.",
+      "example": "Measure the effect of a course on salary by comparing similar people.",
+      "diagram": "each treated -> similar untreated match -> compare outcomes"
+    }
+  },
+  {
+    "id": "ab-test-experiment-design",
+    "name": "Design of Experiments / A/B Testing",
+    "when_to_use": "Decide between two or more versions of something (page, email, process) before scaling; random assignment to groups and statistical comparison of the result.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/hypothesis_tests/ab_test_experiment_design.py"
+    ],
+    "notes": "Formalizes how to split groups and measure the outcome so that cause and effect can be claimed with statistical confidence. Applications: test two versions of a page, email or process before scaling.",
+    "expected_input": {
+      "problem_type": "causal inference / hypothesis test",
+      "data_structure": "tabular",
+      "question": "How to design and measure an experiment so that cause and effect can be claimed with confidence?"
+    },
+    "python_functions": [
+      "ab_test_proportions()",
+      "ab_sample_size()"
+    ],
+    "category": "hypothesis_tests",
+    "pdca_use": "Plan/Check phase: size the sample and statistically compare two versions of an action before scaling — closed-form formulas (proportions/sample size), no model fitting.",
+    "plain_explanation": {
+      "purpose": "Compares two randomly assigned versions (A and B) to see which works better, and plans the size of the test.",
+      "when_to_use_plain": "When you can randomly choose who sees what.",
+      "data_needed": "For each participant, the version received and the outcome (e.g., converted or not).",
+      "example": "Test which of two emails gets more replies.",
+      "diagram": "audience -> random draw -> version A | version B -> compare rates"
+    }
+  },
+  {
+    "id": "monte-carlo-simulation",
+    "name": "Monte Carlo Simulation",
+    "when_to_use": "The result depends on several uncertain variables with plausible ranges/distributions; generate thousands of random scenarios to estimate the distribution of the result and its risk.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/optimization_simulation/monte_carlo_simulation.py"
+    ],
+    "notes": "Tests thousands of random scenarios within plausible ranges to estimate the risk and variation of a result. Applications: cash-flow projection, project-duration estimation.",
+    "expected_input": {
+      "data_structure": "input parameters/distributions",
+      "question": "What is the risk and variation range of a result, given that several inputs are uncertain?"
+    },
+    "python_functions": [
+      "simulate_monte_carlo()"
+    ],
+    "category": "optimization_simulation",
+    "pdca_use": "Plan phase: project the risk/variation range of a result (e.g., duration, cost of an action) from explicit distributions provided by the planner — deterministic given the seed and parameters, does not learn patterns from data.",
+    "plain_explanation": {
+      "purpose": "Repeats a scenario with random draws thousands of times to see the range of possible outcomes.",
+      "when_to_use_plain": "When several factors are uncertain and you want the chance of each outcome.",
+      "data_needed": "Likely values (minimum, most likely, maximum) for each uncertainty.",
+      "example": "Estimate the chance of a project overrunning its deadline.",
+      "diagram": "draw values -> compute -> repeat 10,000x -> distribution of results"
+    }
+  },
+  {
+    "id": "integer-programming-transport",
+    "name": "Integer Programming / Transportation and Assignment Problem",
+    "when_to_use": "Optimization problem (complements 23-programacao-linear/23-metodo-simplex) where the solution must be in whole numbers (not fractional), or a classic distribution problem between origins and destinations at minimum cost.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/optimization_simulation/integer_programming_transport.py"
+    ],
+    "notes": "Complements the already cataloged Linear Programming/Simplex for when the solution must be in whole numbers (not fractional) or is a classic distribution problem. Applications: team allocation, routing, distribution between factories and distribution centers.",
+    "expected_input": {
+      "data_structure": "tabular (objective function and constraints)",
+      "question": "What is the minimum-cost allocation/distribution, given that the solution must be integer?"
+    },
+    "python_functions": [
+      "solve_transport_problem()"
+    ],
+    "category": "optimization_simulation",
+    "pdca_use": "Plan phase: minimum-cost allocation/distribution between origins and destinations (e.g., teams, inventory) when the solution must be in whole units — same deterministic nature as the Simplex.",
+    "plain_explanation": {
+      "purpose": "Plans what to ship from where to where at the lowest cost, in whole quantities.",
+      "when_to_use_plain": "When there are origins, destinations, route costs and limits.",
+      "data_needed": "Cost per route, supply of each origin and demand of each destination.",
+      "example": "Decide which factory supplies which distribution center.",
+      "diagram": "factories -> routes with cost -> centers (lowest total cost)"
+    }
+  },
+  {
+    "id": "spc-control-charts",
+    "name": "Control Charts (SPC) and Process Capability (Cp/Cpk)",
+    "when_to_use": "Process measured repeatedly over time; control charts assess whether the process is stable (common vs. special causes), Cp/Cpk measure whether it is within acceptable specification limits.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/hypothesis_tests/spc_control_charts.py"
+    ],
+    "notes": "Tracks a process over time to see whether it is stable, and measures whether it is within acceptable limits. Applications: industrial quality control, operational indicator monitoring.",
+    "expected_input": {
+      "data_structure": "time series of process measurements",
+      "question": "Is the process stable over time, and within acceptable limits?"
+    },
+    "python_functions": [
+      "xbar_r_chart()",
+      "process_capability()"
+    ],
+    "category": "hypothesis_tests",
+    "pdca_use": "Direct fit for Check: control charts and Cp/Cpk are the classic SPC instrument for telling whether a process is stable and within specification — same logic as industrial PDCA, 100% deterministic calculation.",
+    "plain_explanation": {
+      "purpose": "Tracks a process over time and warns when it leaves its normal behavior.",
+      "when_to_use_plain": "When you want to monitor ongoing quality or performance.",
+      "data_needed": "Successive measurements of the process, in time order.",
+      "example": "Watch the daily response time and act when it leaves the band.",
+      "diagram": "upper limit ---------\nmean       ~~~~~~~~~\nlower limit ---------"
+    }
+  },
+  {
+    "id": "spatial-analysis",
+    "name": "Spatial Analysis / Geostatistics",
+    "when_to_use": "Data with geographic location (coordinates, municipality, region); account for the fact that nearby observations tend to be more alike (spatial autocorrelation) instead of treating each point as independent.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/causal_special/spatial_analysis.py"
+    ],
+    "expected_input": {
+      "data_structure": "geospatial data (point or area)",
+      "question": "How does the geographic location of each observation relate to the measured value?"
+    },
+    "python_functions": [
+      "moran_index()",
+      "spatial_clusters()"
+    ],
+    "category": "causal_special",
+    "plain_explanation": {
+      "purpose": "Analyzes data that has a place on the map, checking whether neighbors resemble each other.",
+      "when_to_use_plain": "When location matters for the outcome.",
+      "data_needed": "Values per location, with coordinates or a region identifier.",
+      "example": "See whether neighborhoods with a high incidence of a problem cluster together.",
+      "diagram": "map -> similar neighboring regions? -> clusters"
+    }
+  },
+  {
+    "id": "network-analysis",
+    "name": "Social Network Analysis / Graphs",
+    "when_to_use": "Data representable as connections between entities (people, companies, items); measure centrality, distance and communities in the network formed by these connections.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/causal_special/network_analysis.py"
+    ],
+    "notes": "Maps connections between people/items and measures who is most central or which groups form in the network. Applications: customer referral network, informal org chart, co-authorship.",
+    "expected_input": {
+      "data_structure": "graph (nodes and edges)",
+      "question": "Who is most central in the network, and which groups form in it?"
+    },
+    "python_functions": [
+      "network_metrics()",
+      "detect_communities()"
+    ],
+    "category": "causal_special",
+    "plain_explanation": {
+      "purpose": "Studies connections between entities, finding the most central ones and the groups.",
+      "when_to_use_plain": "When the question is about who is connected to whom.",
+      "data_needed": "List of connected pairs (who links to whom), with optional weight.",
+      "example": "Find central suppliers in a purchasing network.",
+      "diagram": "A--B--C\n   |\n   D (B is central)"
+    }
+  },
+  {
+    "id": "lda-topic-modeling",
+    "name": "Topic Modeling (LDA)",
+    "when_to_use": "Large set of texts with no prior topic label; complements 21-text-mining-basico/22-tfidf by automatically inferring the latent topics that explain the vocabulary of the documents.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/text/lda_topic_modeling.py"
+    ],
+    "notes": "Automatically finds the hidden \"topics\" in a large set of texts, with no prior label. Applications: discover recurring themes in open-ended survey answers.",
+    "expected_input": {
+      "problem_type": "unsupervised",
+      "data_structure": "text corpus",
+      "question": "Which latent topics explain a large set of texts, with no prior label?"
+    },
+    "python_functions": [
+      "model_topics()"
+    ],
+    "category": "text",
+    "plain_explanation": {
+      "purpose": "Automatically discovers the subjects that appear in a set of texts.",
+      "when_to_use_plain": "When there are many texts and nobody can read them all.",
+      "data_needed": "A text column, one document per row, in large volume.",
+      "example": "Discover the themes of thousands of complaints.",
+      "diagram": "texts -> [LDA] -> topic 1 (words), topic 2 (words)..."
+    }
+  },
+  {
+    "id": "word-embeddings",
+    "name": "Word Embeddings (Word2Vec / GloVe)",
+    "when_to_use": "Need for semantic similarity between words/texts beyond term counts (complements 22-tfidf); represents words as numeric vectors where words with similar meaning end up close together.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/text/word_embeddings.py"
+    ],
+    "notes": "Represents words as numbers so that words with similar meaning are mathematically \"close\". Applications: semantic search, grouping similar answers even when different words are used.",
+    "expected_input": {
+      "data_structure": "text corpus",
+      "question": "Which words/texts have similar meaning, even when using different words?"
+    },
+    "python_functions": [
+      "train_embeddings()",
+      "similar_words()"
+    ],
+    "category": "text",
+    "plain_explanation": {
+      "purpose": "Turns words into numbers so that similar meanings end up close together.",
+      "when_to_use_plain": "When you want the computer to understand that different words can mean the same thing.",
+      "data_needed": "A large set of texts to learn the relationships.",
+      "example": "Search documents by meaning, not only by the exact word.",
+      "diagram": "'car' and 'automobile' end up close; 'banana' far away"
+    }
+  },
+  {
+    "id": "recommender-systems",
+    "name": "Recommender Systems (collaborative filtering)",
+    "when_to_use": "User-item interaction history (purchase, rating, click); suggest items to a user based on what similar users preferred.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/causal_special/recommender_systems.py"
+    ],
+    "notes": "Suggests items to a user based on what similar users liked. Applications: product/content recommendation.",
+    "expected_input": {
+      "data_structure": "user-item matrix (interactions/ratings)",
+      "question": "What to recommend to a user, based on what similar users preferred?"
+    },
+    "python_functions": [
+      "item_item_recommendation()",
+      "svd_factorization_recommendation()"
+    ],
+    "category": "causal_special",
+    "plain_explanation": {
+      "purpose": "Suggests items to a person based on what similar people chose.",
+      "when_to_use_plain": "When there is a history of who consumed what and you want to suggest the next item.",
+      "data_needed": "Table with the person's identifier, the item's and, if available, the rating given.",
+      "example": "Suggest products to a customer based on what similar customers bought.",
+      "diagram": "you ~ similar people -> what they liked and you have not seen yet"
+    }
+  },
+  {
+    "id": "bayesian-statistics",
+    "name": "Bayesian Statistics / Regression",
+    "when_to_use": "Same question as a traditional regression, but with prior knowledge to incorporate and/or little data; the answer comes out as a probability distribution (explicit uncertainty), not just a point estimate.",
+    "code_status": "own Python implementation (analyses/)",
+    "sources": [
+      "analyses/regression/bayesian_statistics.py"
+    ],
+    "notes": "Same question as traditional regression, but incorporates prior knowledge and gives the uncertainty of the answer as a probability, not just a number. Applications: forecasting with little data, updating an estimate as new data arrive.",
+    "expected_input": {
+      "problem_type": "supervised - regression",
+      "data_structure": "tabular",
+      "question": "What is the estimate and its uncertainty, incorporating prior knowledge?"
+    },
+    "python_functions": [
+      "bayesian_regression()",
+      "beta_binomial_ab()"
+    ],
+    "category": "regression",
+    "plain_explanation": {
+      "purpose": "Updates an initial belief with the data, returning the chance of each possible value.",
+      "when_to_use_plain": "When there is useful prior knowledge or little data.",
+      "data_needed": "The observed data and a prior belief about what is expected.",
+      "example": "Estimate the conversion rate of a new campaign, starting from that of past campaigns.",
+      "diagram": "initial belief + new data = updated belief"
+    }
+  }
+]

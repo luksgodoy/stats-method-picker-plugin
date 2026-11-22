@@ -1,0 +1,14 @@
+{
+  "name": "stats-method-picker-marketplace",
+  "owner": {
+    "name": "luksgodoy"
+  },
+  "plugins": [
+    {
+      "name": "stats-method-picker",
+      "source": "./",
+      "description": "Catalog of 70 statistical and ML techniques with Python wrappers."
+    }
+  ],
+  "description": "Marketplace for the stats-method-picker plugin: a catalog of 70 statistical and ML techniques."
+}

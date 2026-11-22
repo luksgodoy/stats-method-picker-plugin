@@ -1,0 +1,10 @@
+{
+  "name": "stats-method-picker",
+  "description": "Catalog of 70 statistical and ML techniques with Python wrappers, consulted before choosing an analysis method.",
+  "version": "0.1.0",
+  "skills": "./skills",
+  "author": {
+    "name": "luksgodoy"
+  },
+  "license": "MIT"
+}
